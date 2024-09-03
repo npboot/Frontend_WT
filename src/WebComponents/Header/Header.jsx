@@ -4,7 +4,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 
 function Header(){
 return (
-<ButtonGroup   sx={{
+<ButtonGroup id="ButtonGroup"  sx={{
     ".MuiButtonGroup-grouped": {
     borderColor:"#black",
     background:"#05b336",
