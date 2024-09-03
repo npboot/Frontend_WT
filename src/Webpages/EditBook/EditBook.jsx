@@ -1,7 +1,13 @@
+import Header from "../../WebComponents/Header/Header";
 function EditBook() {
     return (
-      <div className="EditBook">
+      <div>
+        <div>
+        <Header/>
+        </div>
+        <div className="EditBook">
 
+        </div>
       </div>
     );
   }

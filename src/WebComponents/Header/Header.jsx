@@ -1,0 +1,25 @@
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
+function Header(){
+return (
+<ButtonGroup   sx={{
+    ".MuiButtonGroup-grouped": {
+    borderColor:"#black",
+    background:"#05b336",
+    fontWeight: 700,
+    color: "black",
+    borderRadius: 0,
+    },
+  }}variant="contained" size="lg" fullWidth aria-label="Basic button group">
+  <Button>Home</Button>
+  <Button>Catalogus</Button>
+  <Button>Reservering</Button>
+  <Button>TBA</Button>
+  <Button>TBA</Button>
+</ButtonGroup>
+);
+}
+
+export default Header;
