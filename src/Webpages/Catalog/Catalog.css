@@ -1,0 +1,127 @@
+
+/* constants, maybe these should be moved to app.css in the future*/
+body{
+    --DARK-GREEN: rgb(3,171,3);
+    --LIGHT-GREEN: rgb(0,230,0);
+    --GRAY: rgb(82,82,91);
+    --LIGHT-GRAY: rgb(228,228,231);
+    --THIN-BORDER: 1px solid black;
+    --MEDIUM-BORDER: 2px solid black;   
+    }
+
+/* general styles used for multiple components*/
+.tableRow {
+    display: flex;
+    flex-direction: row;
+    padding: 4px 10px;
+    text-align: left;
+    overflow-x: hidden;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.darkButton {
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 9999px;
+    border: 0;
+    margin-left: 2px;
+}
+
+.darkButton:hover {
+    background-color: var(--GRAY);
+}
+
+.scroll{
+    overflow-y: scroll;
+    scrollbar-color: black var(--LIGHT-GRAY);
+    scrollbar-width:thin;
+}
+
+
+/*specific syles for single components*/
+.catalog {
+    margin-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.searchRow {
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.searchBar {
+    justify-content: space-between;
+    background-color: var(--LIGHT-GRAY);
+    width: 40%;
+    border-radius: 9999px;
+    height: 2.5em;
+}
+
+.searchInputField {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.searchInputField:focus {
+    outline: none;
+}
+
+.navigationRow{
+    justify-content: space-between;
+}
+
+.navigationRow a {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.navigationRow a:hover {
+    color: var(--GRAY);
+}
+
+.catalogTable {
+    border: var(--MEDIUM-BORDER);    
+}
+
+.columnTitle {
+    width: 35%;    
+}
+.columnAuthor {
+    width: 25%;
+}
+.columnYear {
+    width: 15%;
+}
+.columnAvailability {
+    width: 25%;
+}
+
+.tableHeader {
+    background-color: var(--LIGHT-GREEN);
+    font-weight: bold;
+    border: var(--THIN-BORDER);
+}
+
+.tableContent {
+    height: 200px;
+    resize:vertical;
+}
+
+.book {
+    border: var(--THIN-BORDER);
+}
