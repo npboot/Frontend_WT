@@ -1,38 +1,31 @@
 .App {
-  text-align: center;
+  /* constants*/
+  --DARK-GREEN: rgb(3,171,3);
+  --LIGHT-GREEN: rgb(0,230,0);
+  --GRAY: rgb(82,82,91);
+  --LIGHT-GRAY: rgb(228,228,231);
+  --THIN-BORDER: 1px solid black;       /*Can be used for example in tables, use the thin border inside a table*/
+  --MEDIUM-BORDER: 2px solid black;     /*Can be used for example in tables, use the medium border around a table*/
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.darkButton {
+  background-color: black;
   color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 9999px;
+  border: 0;
+  margin-left: 2px;
 }
 
-.App-link {
-  color: #61dafb;
+.darkButton:hover {
+  background-color: var(--GRAY);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.scroll{
+  overflow-y: scroll;
+  scrollbar-color: black var(--LIGHT-GRAY);
+  scrollbar-width:thin;
 }
