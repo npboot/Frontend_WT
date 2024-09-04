@@ -1,14 +1,3 @@
-
-/* constants, maybe these should be moved to app.css in the future*/
-body{
-    --DARK-GREEN: rgb(3,171,3);
-    --LIGHT-GREEN: rgb(0,230,0);
-    --GRAY: rgb(82,82,91);
-    --LIGHT-GRAY: rgb(228,228,231);
-    --THIN-BORDER: 1px solid black;
-    --MEDIUM-BORDER: 2px solid black;   
-    }
-
 /* general styles used for multiple components*/
 .tableRow {
     display: flex;
@@ -22,29 +11,6 @@ body{
     display: flex;
     flex-direction: row;
 }
-
-.darkButton {
-    background-color: black;
-    color: white;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    border-radius: 9999px;
-    border: 0;
-    margin-left: 2px;
-}
-
-.darkButton:hover {
-    background-color: var(--GRAY);
-}
-
-.scroll{
-    overflow-y: scroll;
-    scrollbar-color: black var(--LIGHT-GRAY);
-    scrollbar-width:thin;
-}
-
 
 /*specific syles for single components*/
 .catalog {
