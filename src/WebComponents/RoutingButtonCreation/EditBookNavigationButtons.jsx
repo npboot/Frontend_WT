@@ -8,6 +8,6 @@ export function EditBookCatalogBT() {
         navigate("/Catalogus");
     };
     return (
-  <Button color='Black' style={{marginLeft:"5%", paddingTop:"1%", paddingBottom:"1%"}} onClick={()=>{SetNavigate()}}><ArrowBackIcon/> Terug naar catalogus</Button>
+        <Button color='Black' style={{marginLeft:"5%", paddingTop:"1%", paddingBottom:"1%"}} onClick={()=>{SetNavigate()}}><ArrowBackIcon/> Terug naar catalogus</Button>
     );
   }
