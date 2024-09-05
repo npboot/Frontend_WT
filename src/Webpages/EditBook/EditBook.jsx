@@ -1,7 +1,7 @@
-import {Button,Box,Grid2 as Grid,TextField,H4} from '@mui/material';
+import {Button,Box,Grid2 as Grid,TextField} from '@mui/material';
 import Header from "../../WebComponents/Header/Header";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {ToCatalog} from "../../Navigation/initiateRouting.js"
+import { EditBookCatalogBT } from '../../WebComponents/RoutingButtonCreation/EditBookNavigationButtons';
+
 function EditBook() {
     return (
       <div>
@@ -10,7 +10,7 @@ function EditBook() {
         </div>
         <div className="EditBook">
           <div class="catalogReturn" align="left">
-          <Button color='Black'onClick={()=>{ToCatalog()}} style={{marginLeft:"5%", paddingTop:"1%", paddingBottom:"1%"}}><ArrowBackIcon/> Terug naar catalogus</Button>
+          <EditBookCatalogBT/>
           </div>
           <div class= "AddBookContainer">
           <Box sx={{ border: 1,borderColor: 'text.primary'}} style={{marginLeft:"7%",marginRight:"7%", paddingBottom:"1%"}}>

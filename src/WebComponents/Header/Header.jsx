@@ -1,7 +1,6 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useNavigate } from "react-router";
-import {ToLogin,ToBookInfo,ToCatalog,ToEditBook} from "../../Navigation/initiateRouting.js"
+import {CatalogBT, HomePageBT, ReserveBookBT} from '../RoutingButtonCreation/HeaderNavigationButtons';
 
 function Header(){
 return (
@@ -14,25 +13,14 @@ return (
     borderRadius: 0,
     },
   }}variant="contained" size="lg" fullWidth aria-label="Basic button group">
-  <Button onClick={()=>{ToHomePage()}}>Home</Button>
-  <Button onClick={()=>{ToCatalog()}}>Catalogus</Button>
-  <Button onClick={()=>{ToBookInfo()}}>Reservering</Button>
+  <HomePageBT>Home</HomePageBT>/
+  <CatalogBT >Catalogus</CatalogBT>
+  <ReserveBookBT>Reservering</ReserveBookBT>
   <Button>TBA</Button>
   <Button>TBA</Button>
 </ButtonGroup>
 );
 }
 
-function ToHomePage(){
-  //ToDo How to validate active user type to route to homepage
-      let tempUserType="";
-      const navigate = useNavigate();
-      if(tempUserType==="Trainee"){
-          navigate("/Trainee");
-          }
-          else{
-          navigate("/Trainer") ;
-          }
-   }
 
 export default Header;
