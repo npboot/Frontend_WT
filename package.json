@@ -35,11 +35,11 @@
     "nightwatch": "^3.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:e2e": "nightwatch",
-    "eject": "react-scripts eject",
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "test": "DISABLE_ESLINT_PLUGIN=true react-scripts test",
+    "test:e2e": "DISABLE_ESLINT_PLUGIN=true nightwatch",
+    "eject": "DISABLE_ESLINT_PLUGIN=true react-scripts eject",
     "lint": "eslint \"src/**/*.{js,jsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix"
   },
