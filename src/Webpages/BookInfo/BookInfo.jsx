@@ -1,10 +1,16 @@
 
 import './BookInfo.css';
+import Header from "../../WebComponents/Header/Header";
 
 function BookInfo() {
     return (
+      
+      
  
       <div className="BookInfo">
+        <div>
+        <Header />
+      </div>
         <img src = "/logo192.png" alt= "image" class = "backToCatalogusArrow"></img>
       
       <span>Terug naar catalogus</span>
