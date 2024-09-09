@@ -22,9 +22,9 @@
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.9.1",
+    "@eslint/js": "^9.10.0",
     "chromedriver": "^128.0.1",
-    "eslint": "^9.9.1",
+    "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^28.8.3",
     "eslint-plugin-jsx-a11y": "^6.10.0",

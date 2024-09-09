@@ -10,9 +10,9 @@ import { FlatCompat } from "@eslint/eslintrc";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all
 });
 
 export default [...fixupConfigRules(compat.extends(
@@ -20,37 +20,37 @@ export default [...fixupConfigRules(compat.extends(
   "plugin:react/recommended",
   "plugin:jsx-a11y/recommended",
 )), {
-    plugins: {
-        react: fixupPluginRules(react),
-        "jsx-a11y": fixupPluginRules(jsxA11Y),
+  plugins: {
+    react: fixupPluginRules(react),
+    "jsx-a11y": fixupPluginRules(jsxA11Y),
+  },
+
+  languageOptions: {
+    globals: {
+      ...globals.browser,
+      ...globals.node,
     },
 
-    languageOptions: {
-        globals: {
-            ...globals.browser,
-            ...globals.node,
-        },
+    ecmaVersion: 2021,
+    sourceType: "module",
 
-        ecmaVersion: 2021,
-        sourceType: "module",
-
-        parserOptions: {
-            ecmaFeatures: {
-                jsx: true,
-            },
-        },
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true,
+      },
     },
+  },
 
-    settings: {
-        react: {
-            version: "detect",
-        },
+  settings: {
+    react: {
+      version: "detect",
     },
+  },
 
-    rules: {
-        "react/prop-types": 0,
-        indent: ["error", 2],
-        "linebreak-style": 1,
-        quotes: ["error", "double"],
-    },
+  rules: {
+    "react/prop-types": 0,
+    indent: ["error", 2],
+    "linebreak-style": 1,
+    quotes: ["error", "double"],
+  },
 }];
