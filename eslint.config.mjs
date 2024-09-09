@@ -16,9 +16,9 @@ const compat = new FlatCompat({
 });
 
 export default [...fixupConfigRules(compat.extends(
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
+  "eslint:recommended",
+  "plugin:react/recommended",
+  "plugin:jsx-a11y/recommended",
 )), {
     plugins: {
         react: fixupPluginRules(react),
