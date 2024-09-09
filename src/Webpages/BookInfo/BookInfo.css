@@ -1,0 +1,108 @@
+#exemplaarToevoegenButton{
+    background-color: black;
+    color: white;
+    margin: .1rem;
+}
+#imageAndBookInfoSubContainer{
+    padding: .5rem;
+}
+
+.backToCatalogusArrow{
+    width: 30px;
+}
+.BookInfo{
+    background-color: rgb(217, 217, 217);
+}
+.noMargin{
+    margin: 0px;
+}
+.bookInstanceText{
+    margin: 0px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 90%;
+    margin: auto;
+}
+.bigBorder{
+    border-style: solid;
+    border-color: rgb(103, 103, 103);
+    border-width: 2px;
+}
+.smallBorder{
+    border-style: solid;
+    border-color: rgb(103, 103, 103);
+    border-width: 1px;
+}
+.titleHeader{
+    background-color: rgb(110,153,100);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; 
+}
+.containerBookInfo{
+    padding-top: .5rem;
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    gap: 1rem;
+}
+
+.coverImage{
+    width: 150px;
+    height: 150px;
+}
+
+.testsquare{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(221,138,138);
+    border-style: solid;
+    border-color: brown;
+}
+#bookInstanceContainer{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: .2rem;
+    height: 220px;
+    overflow-y: auto;
+    width: 98%;
+
+}
+.containerBookInstanceItem{
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+}
+.debug{
+    border-style: dashed;
+    border-color: rgb(103, 103, 103);
+    border-width: 1px;
+}
+
+.blue{
+    border-color: blue;
+}
+.iSBNtext{
+    width:4rem;
+}
+.lendText{
+    width:50%;
+}
+.condition{
+    width:25%;
+}
+.dropDownButton{
+    height:1.5rem;
+    width:1.5rem;
+}
+
