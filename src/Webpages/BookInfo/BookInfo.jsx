@@ -1,11 +1,89 @@
 
 import './BookInfo.css';
 import Header from "../../WebComponents/Header/Header";
+import EditBookCatalogBT from "../../WebComponents/RoutingButtonCreation/EditBookNavigationButtons";
 
 function BookInfo() {
+  const books = [
+    {
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "uitgeleend aan jopus maximus Ultranus supirius dopius nalturius academius",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    }
+  ]
+  function createBookInstanceItem(book){
+    return(
+      <div class='containerBookInstanceItem smallBorder'> 
+              <p class='bookInstanceText iSBNtext'>{book.iSBN}</p>
+              <p class='bookInstanceText lendText'>uitgeleend aan {book.lender} </p>
+              <p class='bookInstanceText condition'>{book.condition}</p>
+              <button class="dropDownButton">\/</button>
+            </div>
+
+    );
+  }
+
     return (
-      
-      
+
  
       <div className="BookInfo">
         <div>
@@ -17,7 +95,7 @@ function BookInfo() {
       <div class='container bigBorder'>
         <div class='titleHeader bigBorder'>
           <h2 class='noMargin'>Java voor dummies</h2>
-          <button id='exemplaarToevoegenButton'>+ exemplaar toevoegen</button>
+          <button id='exemplaarToevoegenButton' > exemplaar toevoegen</button>
           
           </div>
         <div class='containerBookInfo bigBorder'>
@@ -44,6 +122,15 @@ function BookInfo() {
               <p class='bookInstanceText condition'>beschadigd</p>
               <button class="dropDownButton">\/</button>
             </div>
+            {books.map(book=>(createBookInstanceItem(book)))}     
+          </div>
+      </div>
+      </div>
+    );
+  }
+  
+  export default BookInfo;
+  /*
             <div class='containerBookInstanceItem smallBorder'> 
               <p class='bookInstanceText iSBNtext'>324.</p>
               <p class='bookInstanceText lendText'>uitgeleend aan bob </p>
@@ -68,10 +155,4 @@ function BookInfo() {
               <p class='bookInstanceText condition'>nieuw</p>
               <button class="dropDownButton">\/</button>
             </div>
-          </div>
-      </div>
-      </div>
-    );
-  }
-  
-  export default BookInfo;
+              */
