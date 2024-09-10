@@ -1,7 +1,7 @@
 
 import './BookInfo.css';
 import Header from "../../WebComponents/Header/Header";
-import EditBookCatalogBT from "../../WebComponents/RoutingButtonCreation/EditBookNavigationButtons";
+
 
 function BookInfo() {
   const books = [

@@ -1,6 +1,6 @@
 import {Button,Box,Grid2 as Grid,TextField} from '@mui/material';
 import Header from "../../WebComponents/Header/Header";
-import { ConfigurableRouteNavigationBT } from '../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton';
+import { ConfigurableRouteNavigationBTNoFill } from '../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton';
 
 function EditBook() {
     return (
@@ -10,7 +10,7 @@ function EditBook() {
         </div>
         <div className="EditBook">
           <div class="catalogReturn" align="left">
-          <ConfigurableRouteNavigationBT route={"/Catalogus"} text = {"terug naar catalogus"}/>
+          <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"terug naar catalogus"}/>
           </div>
           <div class= "AddBookContainer">
           <Box sx={{ border: 1,borderColor: 'text.primary'}} style={{marginLeft:"7%",marginRight:"7%", paddingBottom:"1%"}}>
