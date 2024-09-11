@@ -1,13 +1,13 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import {CatalogBT, HomePageBT, ReserveBookBT} from '../RoutingButtonCreation/HeaderNavigationButtons';
+import "./Header.css"
 
 function Header(){
 return (
 <ButtonGroup id="ButtonGroup"  sx={{
     ".MuiButtonGroup-grouped": {
     borderColor:"#black",
-    background:"#05b336",
     fontWeight: 700,
     color: "black",
     borderRadius: 0,
