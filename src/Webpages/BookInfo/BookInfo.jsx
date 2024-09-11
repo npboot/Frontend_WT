@@ -101,7 +101,7 @@ function BookInfo() {
         <div class='container bigBorder'>
           <div class='titleHeader bigBorder'>
             <h2 class='noMargin'>Java voor dummies</h2>
-            <button id='exemplaarToevoegenButton' onClick={()=>(navigateToEditBookPage())}> exemplaar toevoegen</button>
+            <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> exemplaar toevoegen</button>
             
             </div>
           <div class='containerBookInfo bigBorder'>
@@ -120,7 +120,7 @@ function BookInfo() {
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam consectetur voluptatem repellendus animi maiores vel dolores architecto fuga sint sequi, sed perspiciatis doloremque, possimus rem inventore, delectus deleniti cum ipsa harum incidunt. Molestias magni voluptas nemo quisquam, numquam possimus necessitatibus omnis cumque labore libero? Fugiat odio voluptatem qui optio hic.
             </div>
             </div>
-            <div id='bookInstanceContainer'class ='bigBorder '>
+            <div id='bookInstanceContainer'class ='bigBorder scroll'>
 
               <div class='containerBookInstanceItem smallBorder'> 
                 <p class='bookInstanceText iSBNtext'>324.001</p>

@@ -2,6 +2,7 @@ import SearchBar from '../../WebComponents/SearchBar/SearchBar.jsx'
 import './Catalog.css';
 import {ConfigurableRouteNavigationBTNoFill} from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton"
 import { useNavigate } from 'react-router'
+import Header from "../../WebComponents/Header/Header.jsx"
 
 function Catalog() {
   //const books data moet in de toekomst uit de database komen
@@ -94,6 +95,10 @@ function Catalog() {
 
     return (
       <div className="catalog">
+          <div>
+            <Header/>
+          </div>
+          <div className='content'>
           <div className="searchRow flexRow">
             <SearchBar/>
           </div>
@@ -124,6 +129,7 @@ function Catalog() {
             <div className="tableContent scroll">
               {books.map(book=>(addBookToCatalogTable(book)))}     
             </div>
+          </div>
           </div>
       </div>
     );

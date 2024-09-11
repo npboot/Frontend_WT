@@ -1,8 +1,4 @@
-#exemplaarToevoegenButton{
-    background-color: black;
-    color: white;
-    margin: .1rem;
-}
+
 #imageAndBookInfoSubContainer{
     padding: .5rem;
 }
@@ -10,9 +6,7 @@
 .backToCatalogusArrow{
     width: 30px;
 }
-.BookInfo{
-    background-color: rgb(217, 217, 217);
-}
+
 .noMargin{
     margin: 0px;
 }
@@ -33,20 +27,22 @@
 }
 .bigBorder{
     border-style: solid;
-    border-color: rgb(103, 103, 103);
+    border-color: black;
     border-width: 2px;
 }
 .smallBorder{
     border-style: solid;
-    border-color: rgb(103, 103, 103);
+    border-color: black;
     border-width: 1px;
 }
 .titleHeader{
-    background-color: rgb(110,153,100);
+    background-color: var(--LIGHT-GREEN);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%; 
+    font-weight: bold;
+    border: var(--THIN-BORDER);
 }
 .containerBookInfo{
     padding-top: .5rem;
@@ -74,7 +70,6 @@
     flex-grow: 1;
     gap: .2rem;
     height: 220px;
-    overflow-y: auto;
     width: 98%;
 
 }
