@@ -1,5 +1,8 @@
 import SearchBar from '../../WebComponents/SearchBar/SearchBar.jsx'
 import './Catalog.css';
+import {ConfigurableRouteNavigationBTNoFill} from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton"
+import { useNavigate } from 'react-router'
+
 function Catalog() {
   //const books data moet in de toekomst uit de database komen
   const books = [
@@ -54,6 +57,10 @@ function Catalog() {
     }
   ]
 
+  const navigate = useNavigate();
+  const navigateToEditBookPage = () => {
+      navigate("/boekaanpassen")}
+
 
   function addBookToCatalogTable(book) {
   /*
@@ -84,15 +91,21 @@ function Catalog() {
     </div>
     )}
   
+
     return (
       <div className="catalog">
           <div className="searchRow flexRow">
             <SearchBar/>
           </div>
-          <div className="navigationRow flexRow">
-            <a href="#">Terug naar homepage</a>
-            <button className="darkButton">+ Toevoegen</button>
+          <div className="navigationRow flexRow trainer">
+            <ConfigurableRouteNavigationBTNoFill route={"/Trainer"} text = {"terug naar homepage"}/>
+            <button className="darkButton" onClick={()=>(navigateToEditBookPage())}>+ Toevoegen</button>
           </div>
+          {/* logic should be added later to make sure that the trainer and trainee see appropriate version
+          <div className="navigationRow flexRow trainee">
+            <ConfigurableRouteNavigationBTNoFill route={"/Trainee"} text = {"terug naar homepage"}/>
+          </div>
+          */}
           <div className="catalogTable">
             <div className="tableHeader tableRow">
               <div className="columnTitle">
