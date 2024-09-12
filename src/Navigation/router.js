@@ -7,6 +7,7 @@ import BookInfo from "../Webpages/BookInfo/BookInfo.jsx";
 import Catalog from "../Webpages/Catalog/Catalog.jsx";
 import EditBook from "../Webpages/EditBook/EditBook.jsx";
 import ReserveBook from "../Webpages/ReserveBook/ReserveBook.jsx";
+import AddBook from "../Webpages/AddBook/AddBook.jsx";
 
 //This Router file will contain references to all webpages and accompanying routes within the project
 export default function Router() {
@@ -20,6 +21,7 @@ export default function Router() {
         <Route path="/Catalogus" element={<Catalog />} />
         <Route path="/BoekAanpassen" element={<EditBook />} />
         <Route path="/Reservering" element={<ReserveBook />} />
+        <Route path="/BoekToevoegen" element={<AddBook/>}/>
       </Routes>
     </BrowserRouter>
   );
