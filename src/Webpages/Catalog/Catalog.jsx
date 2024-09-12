@@ -3,64 +3,34 @@ import './Catalog.css';
 import {ConfigurableRouteNavigationBTNoFill} from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton"
 import { useNavigate } from 'react-router'
 import Header from "../../WebComponents/Header/Header.jsx"
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function Catalog() {
   //const books data moet in de toekomst uit de database komen
-  const books = [
-    {
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5
-    },
-    {
-      title: "Figma for dummies",
-      author: "John Doe",
-      year: "2023",
-      available: 1,
-      total: 1
-    },
-    {
-      title: "Figma for dummies 2023",
-      author: "John Doe",
-      year: "2023",
-      available: 1,
-      total: 1
-    },
-    {
-      title: "Figma for dummies 2023",
-      author: "John Doe",
-      year: "2023",
-      available: 1,
-      total: 1
-    },
-    {
-      title: "Figma for dummies 2023",
-      author: "John Doe",
-      year: "2023",
-      available: 1,
-      total: 1
-    },
-    {
-      title: "Figma for dummies 2023",
-      author: "John Doe",
-      year: "2023",
-      available: 1,
-      total: 1
-    },
-    {
-      title: "Figma for dummies 2023",
-      author: "John Doe",
-      year: "2023",
-      available: 1,
-      total: 1
-    }
-  ]
+  const [books, setBooks] = useState([])
+
+  useEffect(()=>{
+    async function getCatalogData() {
+      const catalogAPI = "http://localhost:8082/book/catalog";
+      try {
+          const response = await fetch(catalogAPI); // Wait for the fetch to complete
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const catalogDataJson = await response.json(); // Wait for the response to be parsed as JSON
+          setBooks(catalogDataJson); // Pass the parsed JSON to your setBooks function
+      } catch (error) {
+          console.error('Error fetching catalog data:', error);
+      };}
+    
+    getCatalogData()
+    },[]  
+  );
 
   const navigate = useNavigate();
-  const navigateToEditBookPage = () => {
-      navigate("/boekaanpassen")}
+  const navigateToAddBookPage = () => {
+      navigate("/boektoevoegen")}
 
 
   function addBookToCatalogTable(book) {
@@ -75,6 +45,7 @@ function Catalog() {
     total: 5
   }
   */
+    
     return(
     <div className="book tableRow">               
       <div className="columnTitle">
@@ -104,7 +75,7 @@ function Catalog() {
           </div>
           <div className="navigationRow flexRow trainer">
             <ConfigurableRouteNavigationBTNoFill route={"/Trainer"} text = {"terug naar homepage"}/>
-            <button className="darkButton" onClick={()=>(navigateToEditBookPage())}>+ Toevoegen</button>
+            <button className="darkButton" onClick={()=>(navigateToAddBookPage())}>+ Toevoegen</button>
           </div>
           {/* logic should be added later to make sure that the trainer and trainee see appropriate version
           <div className="navigationRow flexRow trainee">
