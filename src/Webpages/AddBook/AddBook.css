@@ -1,0 +1,59 @@
+#addBookTable{
+    border: var(--MEDIUM-BORDER);
+}
+
+#bookForm{
+    border: var(--THIN-BORDER);
+    padding-top: 5px;
+}
+
+.column1{
+    width: 90px;
+}
+.column2{
+    width: 80%;
+}
+.addBookTableContent{
+    justify-content: space-between;
+}
+
+.column1and2, .column3and4{
+    width: 50%;
+}
+
+#summary{
+    width: 100%;
+    height: 110px;
+    resize: vertical;
+    overflow-x: scroll;
+}
+
+/* Chrome, Safari, Edge, Opera: remove arrows in input fields for numbers*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox:  remove arrows in input fields for numbers */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.checkboxRow label{
+    padding-right: 20px;
+}
+
+.checkboxRow input{
+    margin-left: 0px;
+}
+
+button[type=submit]{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100px;
+    margin-left:auto;
+    margin-right: 2%;
+}

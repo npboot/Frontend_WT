@@ -1,10 +1,9 @@
 
 import {ConfigurableRouteNavigationBTNoFill} from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton.jsx"
-import { useNavigate } from 'react-router'
 import Header from "../../WebComponents/Header/Header.jsx"
 import { useEffect } from 'react';
+import "./AddBook.css"
 
- 
 
 function AddBook(){
     useEffect(() => {
@@ -74,34 +73,64 @@ function AddBook(){
 
     return(
         <div className="addBook">
-            <div name="header">
+            <div className="header">
                 <Header/>
             </div>
             <div className="navigation">
-                <div class="catalogReturn" align="left">
+                <div className="catalogReturn" align="left">
                 <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"terug naar catalogus"}/>
                 </div>
             </div>
             <div className="content">
+                <div id="addBookTable">
+                <div className="tableHeader tableRow">
+                    <p>Boek toevoegen</p>
+                </div>
                 <form id="bookForm">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required></input><br></br>
-                    <label for="isbn">ISBN:</label>
-                    <input type="number" id="isbn" name="isbn" required></input><br></br>
-                    <label for="year">Year:</label>
-                    <input type="number" id="year" name="year" required></input><br></br>
-                    <label for="isOnline">Online boek</label>
-                    <input type="checkbox" id="isOnline" name="isOnline"></input><br></br>
-                    <label for="isPhysical">Fysiek boek</label>
-                    <input type="checkbox" id="isPhysical" name="isPhysical"></input><br></br>
-                    <label for="summary">Samenvatting:</label>
-                    <input type="text" id="summary" name="summary" required></input><br></br>
-                    <label for="authorName">Auteur:</label>
-                    <input type="text" id="authorName" name="authorName" required></input><br></br>
-                    <label for="categoryName">Category:</label>
-                    <input type="text" id="categoryName" name="categoryName" required></input><br></br>                    
-                    <button type="submit">Submit</button>
+                    <div className="addBookTableContent tableRow">
+                    <div className="column1and2">
+                    <div className="tableRow">
+                    <label className="column1" htmlFor="title">Title:</label>
+                    <input className="column2" type="text" id="title" name="title" required></input><br></br>
+                    </div>
+                    <div className="tableRow">
+                    <label className="column1" htmlFor="isbn">ISBN:</label>
+                    <input className="column2" type="number" id="isbn" name="isbn" required></input><br></br>
+                    </div>
+                    <div className="tableRow">
+                    <label className="column1" htmlFor="year">Year:</label>
+                    <input className="column2" type="number" id="year" name="year" required></input><br></br>
+                    </div>                    
+                    <div className="tableRow">
+                    <label className="column1" htmlFor="authorName">Auteur:</label>
+                    <input className="column2" type="text" id="authorName" name="authorName" required></input><br></br>
+                    </div>
+                    <div className="tableRow">
+                    <label className="column1" htmlFor="categoryName">Category:</label>
+                    <input className="column2" type="text" id="categoryName" name="categoryName" required></input><br></br>
+                    </div>
+                    <div className="tableRow checkboxRow">
+                    <input type="checkbox" id="isOnline" name="isOnline"></input>
+                    <label htmlFor="isOnline">Online boek</label><br></br>                    
+                    <input type="checkbox" id="isPhysical" name="isPhysical"></input>
+                    <label htmlFor="isPhysical">Fysiek boek</label><br></br>
+                    </div>
+                    
+                    </div>
+                    <div className="column3and4">
+                    <div className="tableRow">                    
+                    <label htmlFor="summary">Samenvatting:</label>
+                    </div>
+                    <div className="tableRow">
+                    <input className="scroll" type="text" id="summary" name="summary" required></input><br></br>
+                    </div>   
+                    <div className="tableRow">              
+                    <button className="darkButton" type="submit">Submit</button>
+                    </div>   
+                    </div>
+                    </div>
                 </form>
+                </div>
             </div>                 
         </div>
     );
