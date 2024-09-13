@@ -111,7 +111,7 @@ function AddBook(){
                     </div>
                     <div className="tableRow checkboxRow">
                     <input type="checkbox" id="isOnline" name="isOnline"></input>
-                    <label htmlFor="isOnline">Online boek</label><br></br>                    
+                    <label htmlFor="isOnline">Online boek</label><br></br>                   
                     <input type="checkbox" id="isPhysical" name="isPhysical"></input>
                     <label htmlFor="isPhysical">Fysiek boek</label><br></br>
                     </div>
@@ -125,7 +125,7 @@ function AddBook(){
                     <input className="scroll" type="text" id="summary" name="summary" required></input><br></br>
                     </div>   
                     <div className="tableRow">              
-                    <button className="darkButton" type="submit">Submit</button>
+                    <button className="darkButton" type="submit">Toevoegen</button>
                     </div>   
                     </div>
                     </div>

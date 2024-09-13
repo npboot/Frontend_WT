@@ -1,7 +1,14 @@
+.navigation{
+    margin-top: 5%;
+}
+
 #addBookTable{
     border: var(--MEDIUM-BORDER);
 }
 
+.addBook .content{
+    padding-top: 0;
+}
 #bookForm{
     border: var(--THIN-BORDER);
     padding-top: 5px;
