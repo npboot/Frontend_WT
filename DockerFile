@@ -1,0 +1,32 @@
+#This docker file is used to configure and run the frontend application in a docker container. For local use and building in CI/CD pipeline
+#Source for info: https://www.freecodecamp.org/news/how-to-dockerize-a-react-application/
+#Source 2: https://mherman.org/blog/dockerizing-a-react-app/
+#Node version used
+FROM node:20.17-alpine
+
+#App directory
+WORKDIR /Frontend_WT/
+
+#File copying for image
+COPY public/ /Frontend_WT/public
+COPY src/ /Frontend_WT/src
+COPY package.json /Frontend_WT/package.json
+COPY package-lock.json /Frontend_WT/package-lock.json
+
+#install dependencies
+RUN npm install
+
+#Environment variables
+EXPOSE 3000
+#Start application
+CMD ["npm", "start"]
+
+#To build docker file, run:
+    #docker image build -t <image_name>:<tag> <path> .
+    #Example: docker build -f DockerFile -t reactdocker:dev . 
+    #Make sure docker desktop is running before running the command to ensure it works accordingly.
+    #If Docker Desktop is not installed yet, download from here: https://www.docker.com/products/docker-desktop/
+    #Install takes a while, if proces completes, check Docker Desktop for the image by going to the tab 'Images'. 
+    # There you should fine a new 'reactdocker' file
+    #Before actually running the image, open the optional settings dropdown of the image and set host port to 3000.
+    # After starting the image you should be able to run the frontend on localhost as usual
