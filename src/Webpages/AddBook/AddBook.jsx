@@ -76,12 +76,13 @@ function AddBook(){
             <div className="header">
                 <Header/>
             </div>
+            <div className="content">
             <div className="navigation">
                 <div className="catalogReturn" align="left">
                 <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"terug naar catalogus"}/>
                 </div>
             </div>
-            <div className="content">
+            
                 <div id="addBookTable">
                 <div className="tableHeader tableRow">
                     <p>Boek toevoegen</p>
@@ -115,14 +116,11 @@ function AddBook(){
                     <input type="checkbox" id="isPhysical" name="isPhysical"></input>
                     <label htmlFor="isPhysical">Fysiek boek</label><br></br>
                     </div>
-                    
-                    </div>
-                    <div className="column3and4">
                     <div className="tableRow">                    
                     <label htmlFor="summary">Samenvatting:</label>
                     </div>
                     <div className="tableRow">
-                    <input className="scroll" type="text" id="summary" name="summary" required></input><br></br>
+                    <textarea className="scroll" type="text" id="summary" name="summary" required></textarea><br></br>
                     </div>   
                     <div className="tableRow">              
                     <button className="darkButton" type="submit">Toevoegen</button>

@@ -3,10 +3,6 @@
     padding: .5rem;
 }
 
-.backToCatalogusArrow{
-    width: 30px;
-}
-
 .noMargin{
     margin: 0px;
 }
@@ -22,7 +18,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 .bigBorder{

@@ -95,13 +95,15 @@ function BookInfo() {
         <div>
         <Header />
         </div>
-        <div className="backToCatalog">
+        <div className='content'>
+        <div className="backToCatalog navigationRow flexRow">
             <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
+            <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
         </div>
         <div class='container bigBorder'>
           <div class='titleHeader bigBorder'>
             <h2 class='noMargin'>Java voor dummies</h2>
-            <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> exemplaar toevoegen</button>
+            
             
             </div>
           <div class='containerBookInfo bigBorder'>
@@ -130,6 +132,7 @@ function BookInfo() {
               </div>
               {books.map(book=>(createBookInstanceItem(book)))}     
             </div>
+        </div>
         </div>
       </div>
     );

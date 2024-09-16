@@ -13,15 +13,6 @@
 }
 
 /*specific syles for single components*/
-.content {
-    padding-left: 7%;
-    padding-right: 7%;
-    padding-top: 5%;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-}
-
 .searchRow {
     justify-content: center;
     align-items: flex-end;
@@ -47,6 +38,7 @@
 
 .navigationRow{
     justify-content: space-between;
+    align-items: baseline;
 }
 
 .navigationRow a {
