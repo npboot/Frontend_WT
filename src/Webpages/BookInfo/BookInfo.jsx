@@ -2,75 +2,46 @@
 import './BookInfo.css';
 import Header from "../../WebComponents/Header/Header";
 import {ConfigurableRouteNavigationBTNoFill} from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton"
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+
 
 function BookInfo() {
-  const books = [
-    {
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "uitgeleend aan jopus maximus Ultranus supirius dopius nalturius academius",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    }
-  ]
+  
+  
+  
+    const [books, setBooks] = useState([])
+
+    useEffect(()=>{
+      async function getBookInfoData() {
+        const getAllBooksAPI = `http://localhost:8082/book/getAllBooks`;
+        try {
+            const response = await fetch(getAllBooksAPI); // Wait for the fetch to complete
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const allBooksDataJson = await response.json(); // Wait for the response to be parsed as JSON
+            //console.log(allBooksDataJson[0]); //check the Json data.
+            setBooks(allBooksDataJson); // Pass the parsed JSON to your setBooks function
+        } catch (error) {
+            console.error('Error fetching catalog data:', error);
+        };}
+      
+        getBookInfoData()
+      },[]  
+    );
+    const location = useLocation();
+    useEffect(()=>{
+      async function getIsbn() {
+        const {state} =  location;
+        const isbn = state?.isbn || 0;
+        console.log("test = "+isbn);
+      }
+      getIsbn()
+      },[location]  
+    );
 
   const navigate = useNavigate();
   const navigateToEditBookPage = () => {
@@ -79,9 +50,9 @@ function BookInfo() {
   function createBookInstanceItem(book){
     return(
       <div class='containerBookInstanceItem smallBorder'> 
-              <p class='bookInstanceText iSBNtext'>{book.iSBN}</p>
-              <p class='bookInstanceText lendText'>uitgeleend aan {book.lender} </p>
-              <p class='bookInstanceText condition'>{book.condition}</p>
+              <p class='bookInstanceText iSBNtext'>{book.isbn}</p>
+              <p class='bookInstanceText lendText'>uitgeleend aan {book.summary} </p>
+              <p class='bookInstanceText condition'>{book.title}</p>
               <button class="dropDownButton">\/</button>
             </div>
 
@@ -89,8 +60,6 @@ function BookInfo() {
   }
 
     return (
-
- 
       <div className="BookInfo">
         <div>
         <Header />
@@ -164,4 +133,69 @@ function BookInfo() {
               <p class='bookInstanceText condition'>nieuw</p>
               <button class="dropDownButton">\/</button>
             </div>
-              */
+  const books = [
+    {
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "uitgeleend aan jopus maximus Ultranus supirius dopius nalturius academius",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    },{
+      title: "Python for dummies",
+      author: "John Doe",
+      year: "2024",
+      available: 4,
+      total: 5,
+      iSBN: "301.112",
+      lender: "Bob",
+      condition: "damaged"
+    }
+  ]*/
