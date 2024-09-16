@@ -9,7 +9,7 @@ export function ConfigurableRouteNavigationBTNoFill({route,text}) {
         navigate(route);
     };
     return (
-        <Button style={{marginLeft:"5%", paddingTop:"1%", paddingBottom:"1%"}} onClick={()=>{SetNavigate()}}><ArrowBackIcon/> {text}</Button>
+        <Button style={{paddingTop:"1%", paddingBottom:"1%", color: "black"}} onClick={()=>{SetNavigate()}}><ArrowBackIcon/> {text}</Button>
     );
   }
 
