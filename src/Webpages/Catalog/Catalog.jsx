@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router'
 import Header from "../../WebComponents/Header/Header.jsx"
 import { useState } from 'react';
 import { useEffect } from 'react';
+//import { Link } from '@react-navigation/native';
 
 function Catalog() {
   //const books data moet in de toekomst uit de database komen
@@ -30,7 +31,9 @@ function Catalog() {
 
   const navigate = useNavigate();
   const navigateToAddBookPage = () => {
-      navigate("/boektoevoegen")}
+      navigate("/boektoevoegen")};
+  const navigateToAddBookInfoPage = (value) => {
+      navigate("/Info",{state:{isbn:value}})};
 
 
   function addBookToCatalogTable(book) {
@@ -47,8 +50,8 @@ function Catalog() {
   */
     
     return(
-    <div className="book tableRow">               
-      <div className="columnTitle">
+    <div className="book tableRow">             
+      <div className="columnTitle" onClick={()=>(navigateToAddBookInfoPage(book.isbn))}>
         {book.title}
       </div>
       <div className="columnAuthor">
