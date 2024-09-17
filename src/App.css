@@ -8,6 +8,18 @@
   --MEDIUM-BORDER: 2px solid black;     /*Can be used for example in tables, use the medium border around a table*/
 }
 
+.mediumBorder{
+  border: var(--MEDIUM-BORDER)
+}
+
+.thinBorder{
+  border: var(--THIN-BORDER)
+}
+
+.noMargin{
+  margin: 0;
+}
+
 .darkButton {
   background-color: black;
   color: white;
