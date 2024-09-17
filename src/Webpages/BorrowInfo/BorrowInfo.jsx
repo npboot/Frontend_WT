@@ -1,8 +1,12 @@
 import "./BorrowInfo.css"
 import Header from "../../WebComponents/Header/Header";
 import { ConfigurableRouteNavigationBTNoFill } from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton";
+import { useNavigate } from "react-router";
 
 function BorrowInfo() {
+    const navigate = useNavigate();
+    const navigateToAddBookInfoPage = (value) => {
+        navigate("/Info",{state:{isbn:value}})};
     /*
     const props = {
         isbn: 123456,
@@ -16,7 +20,7 @@ function BorrowInfo() {
     };
     */
     const props = {
-        isbn: 123456,
+        isbn: 12336412376,
         status: "ingeleverd",
         title: "Java voor dummies",
         author: "John Doe",
@@ -31,14 +35,14 @@ function BorrowInfo() {
         if (status=="uitgeleend") {
             return(
                 <div className="navigationRowButtons">
-                    <button className="darkButton">Boek informatie</button>
+                    <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(props.isbn))}>Boek informatie</button>
                     <button className="darkButton">Inleveren</button>
                 </div>
             )   
         } else {
             return( 
             <div className="navigationRowButtons">
-                <button className="darkButton">Boek informatie</button>
+                <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(props.isbn))}>Boek informatie</button>
             </div>
         )}
     }
