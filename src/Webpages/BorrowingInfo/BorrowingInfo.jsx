@@ -1,4 +1,4 @@
-import "./BorrowInfo.css"
+import "./BorrowingInfo.css"
 import Header from "../../WebComponents/Header/Header";
 import { ConfigurableRouteNavigationBTNoFill } from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton";
 import { useNavigate } from "react-router";
