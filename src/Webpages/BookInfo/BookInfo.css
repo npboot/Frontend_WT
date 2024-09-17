@@ -74,6 +74,41 @@
     width: auto;
     justify-content: space-between;
 }
+.archived{
+    background-color: brown;
+}
+.notArchived{
+    background-color: burlywood;
+}
+.mediumRightMargin{
+    margin-right: 3Rem;
+}
+.containerBookInstanceHistoryItem{
+    display: flex;
+    width: auto;
+}
+.containerBookInstanceItemExtended{
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+}
+.bookInstanceExtendedLeftContainer{
+    display: flex;
+    width: 35%;
+    flex-direction: column;
+    margin-left: 0.5Rem;
+    margin-bottom: 0.2Rem;
+}
+.bookInstanceExtendedRightContainer{
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    gap: .2rem;
+    height: 110px;
+    margin-top: 0.2Rem;
+}
+
+
 .debug{
     border-style: dashed;
     border-color: rgb(103, 103, 103);
