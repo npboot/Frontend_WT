@@ -7,58 +7,119 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 
-
 function BookInfo() {
-  
-  
-  
-    const [books, setBooks] = useState([])
+  //define all variables in the form of states, so they can be changed to reflect the particulair book being viewed
+  const [titel,setTitle] = useState("Java voor dummies");
+  const [author,setAuthor] = useState("John Doe");
+  const [publishDate,setPublishDate] = useState("10-12-2023");
+  const [summary,setSummary] = useState("the brown fox jumps over the lazy dog, the brown fox jumps over the lazy dog, the brown fox jumps over the lazy dog, ");
+  const [books, setBooks] = useState([]);
+  const [isbn, setISBN] = useState("444445");
+  const location = useLocation();
 
-    useEffect(()=>{
-      async function getBookInfoData() {
-        const getAllBooksAPI = `http://localhost:8082/book/getAllBooks`;
-        try {
-            const response = await fetch(getAllBooksAPI); // Wait for the fetch to complete
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const allBooksDataJson = await response.json(); // Wait for the response to be parsed as JSON
-            //console.log(allBooksDataJson[0]); //check the Json data.
-            setBooks(allBooksDataJson); // Pass the parsed JSON to your setBooks function
-        } catch (error) {
-            console.error('Error fetching catalog data:', error);
-        };}
-      
-        getBookInfoData()
-      },[]  
-    );
-    const location = useLocation();
-    useEffect(()=>{
-      async function getIsbn() {
-        const {state} =  location;
-        const isbn = state?.isbn || 0;
-        console.log("test = "+isbn);
-      }
-      getIsbn()
-      },[location]  
-    );
-
+  // this variable an function are used to add routability to the "Exemplaar toevoegen" knop
   const navigate = useNavigate();
   const navigateToEditBookPage = () => {
       navigate("/boekaanpassen")}
-
-  function createBookInstanceItem(book){
-    return(
-      <div class='containerBookInstanceItem smallBorder'> 
-              <p class='bookInstanceText iSBNtext'>{book.isbn}</p>
-              <p class='bookInstanceText lendText'>uitgeleend aan {book.summary} </p>
-              <p class='bookInstanceText condition'>{book.title}</p>
-              <button class="dropDownButton">\/</button>
-            </div>
-
+  
+  // this state + function pair is used to store which book instance items are expaned and which are closed.
+  const [expandedBookIds, setExpandedBookIds] = useState(new Set());
+  const toggleExpand = (id) => {
+    setExpandedBookIds(prev => {
+      const updated = new Set(prev);
+      if (updated.has(id)) {
+        updated.delete(id);
+      } else {
+        updated.add(id);
+      }
+      return updated;
+    });
+  };
+    // this function gets called only when the page loads, this function requests book information from the backend using an API call
+    useEffect(()=>{
+      async function getBookInfoData() {
+        const {state} =  location;
+        const baseBookInfoRequestURL = `http://localhost:8082/book/getBookInfo`;
+        const allCopyInfoByISBN = `${baseBookInfoRequestURL}?isbn=${state?.isbn}`;
+        try {
+            const response = await fetch(allCopyInfoByISBN); // Wait for the fetch to complete
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const allCopyInfoByISBNJSON = await response.json(); // Wait for the response to be parsed as JSON
+            //console.log(allCopyInfoByISBNJSON); //check the Json data.
+            updateBookInformation(allCopyInfoByISBNJSON)
+        } catch (error) {
+            console.error('Error fetching catalog data:', error);
+        };}
+        getBookInfoData()
+      },[]  
     );
+
+    //updates all general book information from a specific title
+  function updateBookInformation(book){
+    setBooks(book);
+    setTitle(book[0].physicalBook.book.title);
+    let stringOfAllAuthors="";
+    book[0].physicalBook.book.authors.map(authorElement=>(
+        stringOfAllAuthors +=authorElement.name+", "
+      ));
+    setAuthor(stringOfAllAuthors);
+    setPublishDate(book[0].physicalBook.book.year);
+    setISBN(book[0].physicalBook.book.isbn);
+    setSummary(book[0].physicalBook.book.summary);
   }
 
+
+
+      //this function formates all the book data into two different divs, one to visualise a summary of the information, one to give a more expansive view.
+  function createBookInstanceItem(physicalBookCopy){
+    if(!expandedBookIds.has(physicalBookCopy.copyId)){
+      return(
+      <div key = {physicalBookCopy.copyId} className='containerBookInstanceItem smallBorder'> 
+        <p className='bookInstanceText iSBNtext'>{physicalBookCopy.copyId}</p>
+        <p className='bookInstanceText lendText'>Uitgeleend aan [WIP] </p>
+        <p className='bookInstanceText condition'>{physicalBookCopy.physicalCondition.conditionType}</p>
+        <button className="dropDownButton" onClick={() => toggleExpand(physicalBookCopy.copyId)}>\/</button>
+      </div>
+      );
+    }else{
+      return(
+        <div className='containerBookInstanceItemExtended smallBorder'> 
+          <div className='bookInstanceExtendedLeftContainer '>
+            <p className='noMargin'>{physicalBookCopy.copyId}</p>
+            <p className='noMargin'>Uitgeleend aan [WIP]</p>
+            <p className='noMargin'>Conditie: {physicalBookCopy.physicalCondition.conditionType}</p>
+            <p className='noMargin'>Aanschafdatum: {physicalBookCopy.purchaseDate.substring(0,10)}</p>
+            <div>
+              <button onClick={() => console.log("Aanpassen knop is geklickt van exemplaar: "+physicalBookCopy.copyId)}>Aanpassen</button>
+              <button onClick={()=> console.log("Archieveren knop is geklickt van exemplaar: "+physicalBookCopy.copyId)}>Archieveren</button>
+            </div>
+          </div>
+          <div key = {physicalBookCopy.copyId} className='bookInstanceExtendedRightContainer  scroll'>
+            <div className='containerBookInstanceHistoryItem smallBorder'> 
+                <span className= 'mediumRightMargin bookInstanceText'>10-10-2024</span>
+                <span className='bookInstanceText'>Uitgeleend aan [WIP1]</span>
+              </div>
+              <div className='containerBookInstanceHistoryItem smallBorder'> 
+                <span className= 'mediumRightMargin bookInstanceText'>10-09-2024</span>
+                <span className='bookInstanceText'>Ingeleverd door [WIP1]</span>
+              </div>
+              <div className='containerBookInstanceHistoryItem smallBorder'> 
+                <span className= 'mediumRightMargin bookInstanceText'>10-07-2024</span>
+                <span className='bookInstanceText'>Uitgeleend aan [WIP2]</span>
+              </div>
+              <div className='containerBookInstanceHistoryItem smallBorder'> 
+                <span className= 'mediumRightMargin bookInstanceText'>03-03-2024</span>
+                <span className='bookInstanceText'>Ingeleverd door [WIP2]</span>
+              </div>
+            </div>
+            <button className="dropDownButton" onClick={() => toggleExpand(physicalBookCopy.copyId)}>/\</button>
+          </div>
+      );
+
+    }
+  }
     return (
       <div className="BookInfo">
         <div>
@@ -66,136 +127,32 @@ function BookInfo() {
         </div>
         <div className='content'>
         <div className="backToCatalog navigationRow flexRow">
-            <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
-            <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
+          <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
+          <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
         </div>
-        <div class='container bigBorder'>
-          <div class='titleHeader bigBorder'>
-            <h2 class='noMargin'>Java voor dummies</h2>
-            
-            
-            </div>
-          <div class='containerBookInfo bigBorder'>
+        <div className='container bigBorder'>
+          <div className='titleHeader bigBorder'>
+            <h2 className='noMargin'>{titel}</h2>
+          </div>
+          <div className='containerBookInfo bigBorder'>
             <div id='imageAndBookInfoSubContainer'>
-            <img class='coverImage' src='/logo192.png' alt= "Cover image"></img>
-            <div> 
-              
-            <p class='noMargin'>Java voor dummies</p>
-            <p class='noMargin'>John Doe</p>
-            <p class='noMargin'>01-01-2024</p>
-            <p class='noMargin'>ISBN: 123.364.123.75</p>
+              <img className='coverImage' src='/logo192.png' alt= "Cover image"></img>
+              <div>   
+                <p className='noMargin'>{titel}</p>
+                <p className='noMargin'>{author}</p>
+                <p className='noMargin'>{publishDate}</p>
+                <p className='noMargin'>ISBN: {isbn}</p>
               </div>
             </div>
-            
-            <div>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam consectetur voluptatem repellendus animi maiores vel dolores architecto fuga sint sequi, sed perspiciatis doloremque, possimus rem inventore, delectus deleniti cum ipsa harum incidunt. Molestias magni voluptas nemo quisquam, numquam possimus necessitatibus omnis cumque labore libero? Fugiat odio voluptatem qui optio hic.
-            </div>
-            </div>
-            <div id='bookInstanceContainer'class ='bigBorder scroll'>
-
-              <div class='containerBookInstanceItem smallBorder'> 
-                <p class='bookInstanceText iSBNtext'>324.001</p>
-                <p class='bookInstanceText lendText'>uitgeleend aan jopus maximus </p>
-                <p class='bookInstanceText condition'>beschadigd</p>
-                <button class="dropDownButton">\/</button>
-              </div>
-              {books.map(book=>(createBookInstanceItem(book)))}     
-            </div>
-        </div>
+            <div>{summary}</div>
+          </div>
+          <div id='bookInstanceContainer'className ='bigBorder scroll'> 
+            {books.map((book)=>(createBookInstanceItem(book)))}  
+          </div>
         </div>
       </div>
+    </div>
     );
   }
-  
   export default BookInfo;
-  /*
-            <div class='containerBookInstanceItem smallBorder'> 
-              <p class='bookInstanceText iSBNtext'>324.</p>
-              <p class='bookInstanceText lendText'>uitgeleend aan bob </p>
-              <p class='bookInstanceText condition'>beschadigd</p>
-              <button class="dropDownButton">\/</button>
-            </div>
-            <div class='containerBookInstanceItem smallBorder'> 
-              <p class='bookInstanceText iSBNtext'>324.001</p>
-              <p class='bookInstanceText lendText'>uitgeleend aan jopus maximus Ultranus supirius dopius nalturius academius </p>
-              <p class='bookInstanceText condition'>beschadigd</p>
-              <button class="dropDownButton">\/</button>
-            </div>
-            <div class='containerBookInstanceItem smallBorder'> 
-              <p class='bookInstanceText iSBNtext'>324.001</p>
-              <p class='bookInstanceText lendText'>uitgeleend aan jopus maximus </p>
-              <p class='bookInstanceText condition'>nieuw</p>
-              <button class="dropDownButton">\/</button>
-            </div>
-            <div class='containerBookInstanceItem smallBorder'> 
-              <p class='bookInstanceText iSBNtext'>324.</p>
-              <p class='bookInstanceText lendText'>uitgeleend aan bob </p>
-              <p class='bookInstanceText condition'>nieuw</p>
-              <button class="dropDownButton">\/</button>
-            </div>
-  const books = [
-    {
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "uitgeleend aan jopus maximus Ultranus supirius dopius nalturius academius",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    },{
-      title: "Python for dummies",
-      author: "John Doe",
-      year: "2024",
-      available: 4,
-      total: 5,
-      iSBN: "301.112",
-      lender: "Bob",
-      condition: "damaged"
-    }
-  ]*/
+
