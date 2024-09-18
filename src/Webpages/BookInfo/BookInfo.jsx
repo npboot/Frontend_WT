@@ -39,7 +39,7 @@ function BookInfo() {
     useEffect(()=>{
       async function getBookInfoData() {
         const {state} =  location;
-        const baseBookInfoRequestURL = `${BASE_API_URL}/book/getBookInfo`;
+        const baseBookInfoRequestURL = `${process.env.REACT_APP_BASE_API_URL}/book/getBookInfo`;
         const allCopyInfoByISBN = `${baseBookInfoRequestURL}?isbn=${state?.isbn}`;
         try {
             const response = await fetch(allCopyInfoByISBN); // Wait for the fetch to complete
