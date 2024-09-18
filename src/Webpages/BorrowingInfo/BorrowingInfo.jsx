@@ -2,52 +2,68 @@ import "./BorrowingInfo.css"
 import Header from "../../WebComponents/Header/Header";
 import { ConfigurableRouteNavigationBTNoFill } from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router";
+import { useState    } from "react";
+import { useEffect } from "react";
 
-function BorrowInfo() {
+function BorrowingInfo() {
     const navigate = useNavigate();
     const navigateToAddBookInfoPage = (value) => {
         navigate("/Info",{state:{isbn:value}})};
-    /*
-    const props = {
-        isbn: 123456,
-        status: "uitgeleend",
-        title: "Java voor dummies",
-        author: "John Doe",
-        copyNr: "001", 
-        note: "Staat in de kast op kantoor in Amsterdam. Mag uit de kast gepakt worden bij lening",
-        startDate: "01-01-2024",
-        endDate: ""
-    };
-    */
-    const props = {
-        isbn: 12336412376,
-        status: "ingeleverd",
-        title: "Java voor dummies",
-        author: "John Doe",
-        copyNr: "001",
-        note: "Staat in de kast op kantoor in Amsterdam. Mag uit de kast gepakt worden bij lening.",
-        startDate: "01-01-2024",
-        endDate: "15-01-2024"
-    };
-    
 
+    const [borrowing, setBorrowing] = useState({});
+
+    useEffect(()=>{
+      async function getBorrowingData() {
+        const getBorrowingInfoAPI = 'http://localhost:8082/borrowing/getInfo?borrowingId=1';
+        try {
+            const response = await fetch(getBorrowingInfoAPI); 
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const borrowingDataJson = await response.json();
+
+            const authors = borrowingDataJson.physicalBookCopy.physicalBook.book.authors;
+            const authorNames = authors.map(author=>(author.name));
+
+            const data = {
+                isbn: borrowingDataJson.physicalBookCopy.physicalBook.book.isbn,
+                status: borrowingDataJson.borrowingStatus.borrowingStatusType,
+                title: borrowingDataJson.physicalBookCopy.physicalBook.book.title,
+                author: authorNames.join(", "),
+                copyNr: borrowingDataJson.physicalBookCopy.copyId,
+                startDate: borrowingDataJson.startDate.slice(0,10),
+                endDate: borrowingDataJson.returnDate.slice(0,10)
+            };
+            setBorrowing(data);
+        } catch (error) {
+            console.error('Error fetching catalog data:', error);
+        };};
+      
+        getBorrowingData();
+      },[]  
+    );
+
+
+   
+        
     function navigationRowButtons(status, isbn){
         if (status=="uitgeleend") {
             return(
                 <div className="navigationRowButtons">
-                    <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(props.isbn))}>Boek informatie</button>
+                    <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(borrowing.isbn))}>Boek informatie</button>
                     <button className="darkButton">Inleveren</button>
                 </div>
             )   
         } else {
             return( 
             <div className="navigationRowButtons">
-                <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(props.isbn))}>Boek informatie</button>
+                <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(borrowing.isbn))}>Boek informatie</button>
             </div>
         )}
     }
 
-    function borrowStatusRow(status, startDate, endDate){
+    function borrowingStatusRow(status, startDate, endDate){
         if (status=="uitgeleend") {
             return(
                 <div className="tableRow thinBorder">
@@ -62,12 +78,10 @@ function BorrowInfo() {
             );
         }
 
-    }
-
-    
+    }    
 
     return (
-        <div className="BorrowInfo">
+        <div className="BorrowingInfo">
             <div className="header">
                 <Header/>
             </div>
@@ -76,18 +90,18 @@ function BorrowInfo() {
                     <div className="catalogReturn" align="left">
                         <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text={"terug naar catalogus"} />
                     </div>
-                    {navigationRowButtons(props.status, props.isbn)}
+                    {navigationRowButtons(borrowing.status, borrowing.isbn)}
                 </div>
-                <div className="BorrowItemTable mediumBorder">
+                <div className="BorrowingItemTable mediumBorder">
                     <div className="tableHeader tableRow">
-                        <p>{props.title}, {props.author}</p>
+                        <p>{borrowing.title}, {borrowing.author}</p>
                     </div>
                     <div className="tableRow thinBorder">
-                        <p className="noMargin">Exemplaar #{props.copyNr}</p>
+                        <p className="noMargin">Exemplaar #{borrowing.copyNr}</p>
                     </div>
-                    {borrowStatusRow(props.status, props.startDate, props.endDate)}
+                    {borrowingStatusRow(borrowing.status, borrowing.startDate, borrowing.endDate)}
                     <div className="tableRow thinBorder noMargin noteRow">
-                        <p className="noMargin">Notities: <br></br>{props.note}</p>
+                        <p className="noMargin">Notities: <br></br>Neem contact op met de trainers voor meer infomatie over het ophalen, opsturen en inleveren van geleende boeken</p>
                     </div>
                 </div>
             </div>
@@ -95,4 +109,4 @@ function BorrowInfo() {
         </div>     
 );}
 
-export default BorrowInfo
+export default BorrowingInfo
