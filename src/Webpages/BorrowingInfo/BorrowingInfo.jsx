@@ -3,34 +3,135 @@ import Header from "../../WebComponents/Header/Header";
 import { ConfigurableRouteNavigationBTNoFill } from "../../WebComponents/RoutingButtonCreation/ConfigurableRouteNavigationButton";
 import { useNavigate } from "react-router";
 
-function BorrowInfo() {
+function BorrowingInfo() {
     const navigate = useNavigate();
     const navigateToAddBookInfoPage = (value) => {
         navigate("/Info",{state:{isbn:value}})};
-    /*
-    const props = {
-        isbn: 123456,
-        status: "uitgeleend",
-        title: "Java voor dummies",
-        author: "John Doe",
-        copyNr: "001", 
-        note: "Staat in de kast op kantoor in Amsterdam. Mag uit de kast gepakt worden bij lening",
-        startDate: "01-01-2024",
-        endDate: ""
-    };
-    */
-    const props = {
-        isbn: 12336412376,
-        status: "ingeleverd",
-        title: "Java voor dummies",
-        author: "John Doe",
-        copyNr: "001",
-        note: "Staat in de kast op kantoor in Amsterdam. Mag uit de kast gepakt worden bij lening.",
-        startDate: "01-01-2024",
-        endDate: "15-01-2024"
-    };
-    
 
+    const data = {
+            "borrowingId": 1,
+            "request": {
+                "requestId": 1,
+                "user": {},
+                "physicalBook": {
+                    "book": {
+                        "isbn": 444444,
+                        "authors": [
+                            {
+                                "authorId": 6,
+                                "name": "Joe"
+                            },
+                            {
+                                "authorId": 5,
+                                "name": "Loe"
+                            },
+                            {
+                                "authorId": 4,
+                                "name": "Hoe"
+                            }
+                        ],
+                        "title": "check",
+                        "summary": "Beste samenvatting die je ooit zult zien",
+                        "year": "2014",
+                        "categories": [
+                            {
+                                "categoryId": 6,
+                                "category": "BEGINNER"
+                            },
+                            {
+                                "categoryId": 4,
+                                "category": "PROGRAMMING"
+                            },
+                            {
+                                "categoryId": 5,
+                                "category": "C#"
+                            }
+                        ],
+                        "isOnline": true,
+                        "isPhysical": true
+                    },
+                    "stock": 1,
+                    "archived": false
+                },
+                "requestDate": "2024-09-10T00:00:00.000+00:00",
+                "requestStatus": {
+                    "requestStatusId": 2,
+                    "requestStatusType": "afgekeurd"
+                }
+            },
+            "physicalBookCopy": {
+                "copyId": 1,
+                "physicalBook": {
+                    "book": {
+                        "isbn": 444444,
+                        "authors": [
+                            {
+                                "authorId": 6,
+                                "name": "Joe"
+                            },
+                            {
+                                "authorId": 5,
+                                "name": "Loe"
+                            },
+                            {
+                                "authorId": 4,
+                                "name": "Hoe"
+                            }
+                        ],
+                        "title": "check",
+                        "summary": "Beste samenvatting die je ooit zult zien",
+                        "year": "2014",
+                        "categories": [
+                            {
+                                "categoryId": 6,
+                                "category": "BEGINNER"
+                            },
+                            {
+                                "categoryId": 4,
+                                "category": "PROGRAMMING"
+                            },
+                            {
+                                "categoryId": 5,
+                                "category": "C#"
+                            }
+                        ],
+                        "isOnline": true,
+                        "isPhysical": true
+                    },
+                    "stock": 1,
+                    "archived": false
+                },
+                "physicalCondition": {
+                    "physicalConditionId": 1,
+                    "conditionType": "nieuw"
+                },
+                "borrowingStatus": {
+                    "borrowingStatusId": 2,
+                    "borrowingStatusType": "actief"
+                },
+                "purchaseDate": "2024-09-17T11:51:07.000+00:00",
+                "archived": false
+            },
+            "startDate": "2024-09-03T11:54:32.000+00:00",
+            "returnDate": "2024-09-17T11:54:32.000+00:00",
+            "borrowingStatus": {
+                "borrowingStatusId": 2,
+                "borrowingStatusType": "uitgeleend"
+                /*"borrowingStatusType": "ingeleverd"*/
+            }
+        }
+    const authors = data.physicalBookCopy.physicalBook.book.authors;
+    const authorNames = authors.map(author=>(author.name));
+    const props = {
+            isbn: data.physicalBookCopy.physicalBook.book.isbn,
+            status: data.borrowingStatus.borrowingStatusType,
+            title: data.physicalBookCopy.physicalBook.book.title,
+            author: authorNames.join(", "),
+            copyNr: data.physicalBookCopy.copyId,
+            startDate: data.startDate,
+            endDate: data.returnDate
+        };
+    
     function navigationRowButtons(status, isbn){
         if (status=="uitgeleend") {
             return(
@@ -47,7 +148,7 @@ function BorrowInfo() {
         )}
     }
 
-    function borrowStatusRow(status, startDate, endDate){
+    function borrowingStatusRow(status, startDate, endDate){
         if (status=="uitgeleend") {
             return(
                 <div className="tableRow thinBorder">
@@ -67,7 +168,8 @@ function BorrowInfo() {
     
 
     return (
-        <div className="BorrowInfo">
+        <div className="BorrowingInfo">
+            {console.log(props)}
             <div className="header">
                 <Header/>
             </div>
@@ -78,16 +180,16 @@ function BorrowInfo() {
                     </div>
                     {navigationRowButtons(props.status, props.isbn)}
                 </div>
-                <div className="BorrowItemTable mediumBorder">
+                <div className="BorrowingItemTable mediumBorder">
                     <div className="tableHeader tableRow">
                         <p>{props.title}, {props.author}</p>
                     </div>
                     <div className="tableRow thinBorder">
                         <p className="noMargin">Exemplaar #{props.copyNr}</p>
                     </div>
-                    {borrowStatusRow(props.status, props.startDate, props.endDate)}
+                    {borrowingStatusRow(props.status, props.startDate, props.endDate)}
                     <div className="tableRow thinBorder noMargin noteRow">
-                        <p className="noMargin">Notities: <br></br>{props.note}</p>
+                        <p className="noMargin">Notities: <br></br>Neem contact op met de trainers voor meer infomatie over het ophalen, opsturen en inleveren van geleende boeken</p>
                     </div>
                 </div>
             </div>
@@ -95,4 +197,4 @@ function BorrowInfo() {
         </div>     
 );}
 
-export default BorrowInfo
+export default BorrowingInfo
