@@ -43,7 +43,7 @@ function BorrowingInfo() {
         getBorrowingData();
       },[]  
     );
-    const location = useLocation();
+
 
    
         
@@ -78,9 +78,7 @@ function BorrowingInfo() {
             );
         }
 
-    }
-
-    
+    }    
 
     return (
         <div className="BorrowingInfo">
