@@ -69,12 +69,12 @@ function BorrowingOverview() {
 
     function activeBorrowingRow(borrowing){
         return(
-            <div className="tableRow noMargin thinBorder" onClick={()=>(navigateToBorrowingInfo(borrowing.borrowingId))}>
-                <p className="column1">{borrowing.copyID}</p>
-                <p className="column2">{borrowing.title}</p>
-                <p className="column3">{borrowing.authorName}</p>
-                <p className="column4">{borrowing.borrowingDate}</p>
-                <ReturnButton borrowingId={borrowing.borrowingId}/>
+            <div className="tableRow noMargin thinBorder">
+                <p className="column1" onClick={()=>(navigateToBorrowingInfo(borrowing.borrowingId))}>{borrowing.copyID}</p>
+                <p className="column2" onClick={()=>(navigateToBorrowingInfo(borrowing.borrowingId))}>{borrowing.title}</p>
+                <p className="column3" onClick={()=>(navigateToBorrowingInfo(borrowing.borrowingId))}>{borrowing.authorName}</p>
+                <p className="column4" onClick={()=>(navigateToBorrowingInfo(borrowing.borrowingId))}>{borrowing.borrowingDate}</p>
+                <ReturnButton borrowingId={borrowing.borrowingId} name={"column5 darkButton"}/>
             </div>
         )
     }

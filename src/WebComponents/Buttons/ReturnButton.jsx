@@ -1,10 +1,10 @@
-function ReturnButton({borrowingId}){
+function ReturnButton({borrowingId, name}){
     const returnBorrowingAPI = `http://localhost:8082/borrowing/returnBorrowing?borrowingId=${borrowingId}`;
     const options = {
         method: 'PUT'
       };
-    function returnBorrowing(){
-        fetch(returnBorrowingAPI, options)
+    async function returnBorrowing(){
+        await fetch(returnBorrowingAPI, options)
             .then(response => {
                 if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -17,10 +17,11 @@ function ReturnButton({borrowingId}){
             .catch(error => {
                 console.error('There was a problem with your fetch operation:', error);
             });
-            window.location.reload(false);
+            
+            window.location.reload(false);  
                 }
             return(
-                <button className="darkButton" onClick={()=>(returnBorrowing())}>Inleveren</button>
+                <button className={name} onClick={()=>(returnBorrowing())}>Inleveren</button>
             )
             }
 

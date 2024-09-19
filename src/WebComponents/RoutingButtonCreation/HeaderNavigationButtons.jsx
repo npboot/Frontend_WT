@@ -66,3 +66,13 @@ export function HomePageBT() {
         <Button onClick={()=>{SetNavigate()}}>Reservering</Button>
     );
   }
+
+  export function BorrowingOverviewBT() {
+    const navigate = useNavigate();
+    const SetNavigate = () => {
+        navigate("/LeningenOverzicht");
+    };
+    return (
+        <Button onClick={()=>{SetNavigate()}}>Leningen</Button>
+    );
+  }

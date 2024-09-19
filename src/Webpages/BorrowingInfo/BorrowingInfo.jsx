@@ -58,7 +58,7 @@ function BorrowingInfo() {
             return(
                 <div className="navigationRowButtons">
                     <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(borrowing.isbn))}>Boek informatie</button>
-                    <ReturnButton borrowingId={borrowing.borrowingId}/>
+                    <ReturnButton borrowingId={borrowing.borrowingId} name={"darkButton"}/>
                 </div>
             )   
         } else {

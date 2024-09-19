@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import {CatalogBT, HomePageBT, ReserveBookBT} from '../RoutingButtonCreation/HeaderNavigationButtons';
+import {CatalogBT, HomePageBT, ReserveBookBT, BorrowingOverviewBT} from '../RoutingButtonCreation/HeaderNavigationButtons';
 import "./Header.css"
 
 function Header(){
@@ -16,7 +16,7 @@ return (
   <HomePageBT>Home</HomePageBT>/
   <CatalogBT >Catalogus</CatalogBT>
   <ReserveBookBT>Reservering</ReserveBookBT>
-  <Button>TBA</Button>
+  <BorrowingOverviewBT>Leningen</BorrowingOverviewBT>
   <Button>TBA</Button>
 </ButtonGroup>
 );
