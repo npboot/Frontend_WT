@@ -47,7 +47,7 @@ function BookInfo() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const allCopyInfoByISBNJSON = await response.json(); // Wait for the response to be parsed as JSON
-            //console.log(allCopyInfoByISBNJSON); //check the Json data.
+            console.log(allCopyInfoByISBNJSON); //check the Json data.
             updateBookInformation(allCopyInfoByISBNJSON)
         } catch (error) {
             console.error('Error fetching catalog data:', error);
@@ -55,6 +55,39 @@ function BookInfo() {
         getBookInfoData()
       },[]  
     );
+    async function tryCreateBorrowRequest() {
+      let pBookId  = getAvailableBookId();
+      if(pBookId == -1){
+        console.log("There are no PhysicalBookCopies available right now");
+        // maby create a borrow request which does not include a specific Id
+
+      }else{
+        const userId = 1;//place holder value
+        const createBorrowRequestURLBase = `http://localhost:8082/borrowing/addRequest`;
+        const createBorrowRequestURL = `${createBorrowRequestURLBase}?pBookId=${pBookId}&userId=${userId}`;
+        try{
+          const response = await fetch(createBorrowRequestURL,{
+            method:'POST'
+          })
+          console.error("response: \n"+response);
+          //maby immidiatly accept the borrowRequest?
+        }
+        catch (error) {
+              console.error('Error creating borrow request:', error);
+          }
+      }
+    }
+    function getAvailableBookId(){ 
+      let availableBookId = -1;
+      let a = 1;
+      let b=2;
+      books.map((book)=>{
+        if(book.availability.availabilityId ==1 && !book.archived){
+          availableBookId = book.copyId;
+        }
+    });
+      return availableBookId;
+    }
 
     //updates all general book information from a specific title
   function updateBookInformation(book){
@@ -128,7 +161,11 @@ function BookInfo() {
         <div className='content'>
         <div className="backToCatalog navigationRow flexRow">
           <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
+          <div>
           <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
+          <button className='darkButton' onClick={()=>(tryCreateBorrowRequest())}> + Lening aanvragen</button>
+          </div>
+          
         </div>
         <div className='container bigBorder'>
           <div className='titleHeader bigBorder'>
