@@ -12,10 +12,12 @@ function BorrowingInfo() {
         navigate("/Info",{state:{isbn:value}})};
 
     const [borrowing, setBorrowing] = useState({});
+    const borrowingId = 1;
+    const getBorrowingInfoAPI = `http://localhost:8082/borrowing/getInfo?borrowingId=${borrowingId}`;
 
     useEffect(()=>{
       async function getBorrowingData() {
-        const getBorrowingInfoAPI = 'http://localhost:8082/borrowing/getInfo?borrowingId=1';
+        
         try {
             const response = await fetch(getBorrowingInfoAPI); 
             if (!response.ok) {
@@ -23,16 +25,14 @@ function BorrowingInfo() {
             }
             const borrowingDataJson = await response.json();
 
-            const authors = borrowingDataJson.physicalBookCopy.physicalBook.book.authors;
-            const authorNames = authors.map(author=>(author.name));
-
             const data = {
-                isbn: borrowingDataJson.physicalBookCopy.physicalBook.book.isbn,
-                status: borrowingDataJson.borrowingStatus.borrowingStatusType,
-                title: borrowingDataJson.physicalBookCopy.physicalBook.book.title,
-                author: authorNames.join(", "),
-                copyNr: borrowingDataJson.physicalBookCopy.copyId,
-                startDate: borrowingDataJson.startDate.slice(0,10),
+                isbn: borrowingDataJson.isbn,
+                status: borrowingDataJson.status,
+                title: borrowingDataJson.title,
+                author: borrowingDataJson.authorName,
+                copyNr: borrowingDataJson.copyID,
+                note: borrowingDataJson.note,
+                startDate: borrowingDataJson.borrowingDate.slice(0,10),
                 endDate: borrowingDataJson.returnDate.slice(0,10)
             };
             setBorrowing(data);
