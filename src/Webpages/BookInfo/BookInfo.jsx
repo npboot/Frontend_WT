@@ -47,7 +47,7 @@ function BookInfo() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const allCopyInfoByISBNJSON = await response.json(); // Wait for the response to be parsed as JSON
-            console.log(allCopyInfoByISBNJSON); //check the Json data.
+            //console.log(allCopyInfoByISBNJSON); //check the Json data.
             updateBookInformation(allCopyInfoByISBNJSON)
         } catch (error) {
             console.error('Error fetching catalog data:', error);
@@ -57,7 +57,6 @@ function BookInfo() {
     );
     async function createBorrowRequest() {
       const pBookId  = books[0].physicalBook.pbookId;
-      console.log("bookId "+books[0].physicalBook.pbookId)
       const userId = 1;//place holder value
         const createBorrowRequestURLBase = `http://localhost:8082/borrowing/addRequest`;
         const createBorrowRequestURL = `${createBorrowRequestURLBase}?pBookId=${pBookId}&userId=${userId}`;
@@ -65,7 +64,6 @@ function BookInfo() {
           const response = await fetch(createBorrowRequestURL,{
             method:'POST'
           })
-          console.error("response: \n"+response);
           //maby immidiatly accept the borrowRequest?
         }
         catch (error) {
