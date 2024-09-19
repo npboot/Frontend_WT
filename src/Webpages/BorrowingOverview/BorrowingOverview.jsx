@@ -3,6 +3,7 @@ import Header from "../../WebComponents/Header/Header"
 import "./BorrowingOverview.css"
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
+import ReturnButton from "../../WebComponents/Buttons/ReturnButton"
 
 function BorrowingOverview() {
     const userId = 1;
@@ -11,20 +12,10 @@ function BorrowingOverview() {
     const navigate = useNavigate();
     const navigateToBorrowingInfo = (value) => {
         navigate("/leningInformatie",{state:{borrowingId:value}})};
-
-    
    
     const [activeBorrowings, setActiveBorrowings] = useState([]);
     const [inactiveBorrowings, setInactiveBorrowings] = useState([]);
-    const propsActiveRequests = [{
-        isbn: 123456,
-        status: "in afwachting",
-        title: "python voor dummies",
-        authorName: "Auteur",
-        copyID: 1,
-        note: "",
-        requestDate: "2024-09-17"
-    }]
+    const [activeRequests, setActiveRequests] = useState([]);
     
     useEffect(()=>{
       async function getAllBorrowings() {
@@ -52,20 +43,63 @@ function BorrowingOverview() {
       },[]  
     );
 
-   
-    
+    function activeBorrowingsTable(){
+        if (activeBorrowings.length > 0){
+        return(
+            <div className="activeBorrowingsTable mediumBorder">
+                    <div className="tableHeader tableRow">
+                        <p className="column1 noMargin">Exemplaar</p>
+                        <p className="column2 noMargin">Titel</p>
+                        <p className="column3 noMargin">Auteur</p>
+                        <p className="column4 noMargin">Startdatum</p>
+                        <p className="column5 noMargin"></p>
+                    </div>
+                    
+                    {activeBorrowings.map(borrowing=>(activeBorrowingRow(borrowing)))}                   
+                </div>
+        )
+        } else {
+            return(
+                <div>
+                    <p>Geen actieve leningen.</p>
+                </div>
+            )
+        }
+    }
+
     function activeBorrowingRow(borrowing){
-        const borrowingId = borrowing.borrowingId;
-    
         return(
             <div className="tableRow noMargin thinBorder" onClick={()=>(navigateToBorrowingInfo(borrowing.borrowingId))}>
                 <p className="column1">{borrowing.copyID}</p>
                 <p className="column2">{borrowing.title}</p>
                 <p className="column3">{borrowing.authorName}</p>
                 <p className="column4">{borrowing.borrowingDate}</p>
-                <button className="column5 darkButton"  >Inleveren</button>
+                <ReturnButton borrowingId={borrowing.borrowingId}/>
             </div>
         )
+    }
+
+    function activeRequestsTable(){
+        if (activeRequests.length > 0){
+        return(
+            <div className="activeRequestsTable mediumBorder">
+            <div className="tableHeader tableRow">
+                <p className="column1 noMargin">Titel</p>
+                <p className="column2 noMargin">Auteur</p>
+                <p className="column3 noMargin">Aavraagdatum</p>
+                <p className="column4 noMargin"></p>
+                <p className="column5 noMargin"></p>
+            </div>
+            {activeRequests.map(propsActiveRequest=>(activeRequestRow(propsActiveRequest)))}                   
+        </div>
+        )
+        } else {
+            return(
+                <div>
+                    <p>Geen openstaande aanvragen.</p>
+                </div>
+            )
+        }
     }
 
     function activeRequestRow(propsActiveRequest){
@@ -79,6 +113,31 @@ function BorrowingOverview() {
             </div>
         )
     }
+
+    function inActiveBorrowingsTable(){
+        if (inactiveBorrowings.length > 0){
+        return(
+            <div className="inactiveBorrowingsTable mediumBorder">
+                    <div className="tableHeader tableRow">
+                        <p className="column1 noMargin">Exemplaar</p>
+                        <p className="column2 noMargin">Titel</p>
+                        <p className="column3 noMargin">Auteur</p>
+                        <p className="column4 noMargin">Startdatum</p>
+                        <p className="column5 noMargin">Ingeleverd</p>
+                    </div>
+                    
+                    {inactiveBorrowings.map(borrowing=>(inactiveBorrowingRow(borrowing)))}                   
+            </div>
+        )
+        } else {
+            return(
+                <div>
+                    <p>Geen ingeleverde boeken.</p>
+                </div>
+            )
+        }
+    }
+
 
     function inactiveBorrowingRow(borrowing){
         return(
@@ -105,42 +164,13 @@ function BorrowingOverview() {
                 </div>
                 <div className="activeBorrowings">
                     <h1>Actieve leningen</h1>
-                <div className="activeBorrowingsTable mediumBorder">
-                    <div className="tableHeader tableRow">
-                        <p className="column1 noMargin">Exemplaar</p>
-                        <p className="column2 noMargin">Titel</p>
-                        <p className="column3 noMargin">Auteur</p>
-                        <p className="column4 noMargin">Startdatum</p>
-                        <p className="column5 noMargin"></p>
-                    </div>
-                    
-                    {activeBorrowings.map(borrowing=>(activeBorrowingRow(borrowing)))}                   
-                </div>
+                    {activeBorrowingsTable()}
                 <div className="activeRequests">
                     <h1>Aanvragen</h1>
-                <div className="activeRequestsTable mediumBorder">
-                    <div className="tableHeader tableRow">
-                        <p className="column1 noMargin">Titel</p>
-                        <p className="column2 noMargin">Auteur</p>
-                        <p className="column3 noMargin">Aavraagdatum</p>
-                        <p className="column4 noMargin"></p>
-                        <p className="column5 noMargin"></p>
-                    </div>
-                    {propsActiveRequests.map(propsActiveRequest=>(activeRequestRow(propsActiveRequest)))}                   
-                </div>
+                    {activeRequestsTable()}
                 <div className="inactiveBorrowings">
                     <h1>Ingeleverd</h1>
-                <div className="inactiveBorrowingsTable mediumBorder">
-                    <div className="tableHeader tableRow">
-                        <p className="column1 noMargin">Exemplaar</p>
-                        <p className="column2 noMargin">Titel</p>
-                        <p className="column3 noMargin">Auteur</p>
-                        <p className="column4 noMargin">Startdatum</p>
-                        <p className="column5 noMargin">Ingeleverd</p>
-                    </div>
-                    
-                    {inactiveBorrowings.map(borrowing=>(inactiveBorrowingRow(borrowing)))}                   
-                </div>
+                    {inActiveBorrowingsTable()}                
                 </div>
                 </div>
                 </div>

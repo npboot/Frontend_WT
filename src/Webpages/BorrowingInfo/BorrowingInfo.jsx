@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
 import { useState    } from "react";
 import { useEffect } from "react";
+import ReturnButton from "../../WebComponents/Buttons/ReturnButton";
 
 function BorrowingInfo() {
     const navigate = useNavigate();
@@ -37,7 +38,8 @@ function BorrowingInfo() {
                 copyNr: borrowingDataJson.copyID,
                 note: borrowingDataJson.note,
                 startDate: borrowingDataJson.borrowingDate.slice(0,10),
-                endDate: borrowingDataJson.returnDate.slice(0,10)
+                endDate: borrowingDataJson.returnDate.slice(0,10),
+                borrowingId: borrowingDataJson.borrowingId
             };
             setBorrowing(data);
         } catch (error) {
@@ -56,7 +58,7 @@ function BorrowingInfo() {
             return(
                 <div className="navigationRowButtons">
                     <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(borrowing.isbn))}>Boek informatie</button>
-                    <button className="darkButton">Inleveren</button>
+                    <ReturnButton borrowingId={borrowing.borrowingId}/>
                 </div>
             )   
         } else {
@@ -92,7 +94,7 @@ function BorrowingInfo() {
             <div className="content">
                 <div className="navigationRow flexRow">
                     <div className="catalogReturn" align="left">
-                        <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text={"terug naar catalogus"} />
+                        <ConfigurableRouteNavigationBTNoFill route={"/LeningenOverzicht"} text={"terug naar overzicht"} />
                     </div>
                     {navigationRowButtons(borrowing.status, borrowing.isbn)}
                 </div>
