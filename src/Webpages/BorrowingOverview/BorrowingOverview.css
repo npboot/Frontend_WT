@@ -1,0 +1,23 @@
+.column1 {
+    width: 30%;
+}
+
+.column2{
+    width: 30%;
+}
+
+.column3{
+    width: 15%;
+}
+
+.column4{
+    width: 15%;
+}
+
+.column5{
+    width: 20%;
+}
+
+.tableRow{
+    align-items: center
+}

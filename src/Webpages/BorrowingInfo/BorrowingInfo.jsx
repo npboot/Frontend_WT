@@ -12,7 +12,11 @@ function BorrowingInfo() {
         navigate("/Info",{state:{isbn:value}})};
 
     const [borrowing, setBorrowing] = useState({});
-    const borrowingId = 1;
+
+    const location = useLocation();
+    const {state} =  location;
+
+    const borrowingId = state?.borrowingId;
     const getBorrowingInfoAPI = `http://localhost:8082/borrowing/getInfo?borrowingId=${borrowingId}`;
 
     useEffect(()=>{
