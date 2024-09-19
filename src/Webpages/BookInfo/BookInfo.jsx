@@ -55,6 +55,24 @@ function BookInfo() {
         getBookInfoData()
       },[]  
     );
+    async function createBorrowRequest() {
+      const pBookId  = books[0].physicalBook.pbookId;
+      const userId = 1;//place holder value
+        const createBorrowRequestURLBase = `http://localhost:8082/borrowing/addRequest`;
+        const createBorrowRequestURL = `${createBorrowRequestURLBase}?pBookId=${pBookId}&userId=${userId}`;
+        try{
+          const response = await fetch(createBorrowRequestURL,{
+            method:'POST'
+          })
+          //maby immidiatly accept the borrowRequest?
+        }
+        catch (error) {
+              console.error('Error creating borrow request:', error);
+          }
+
+        
+      
+    }
 
     //updates all general book information from a specific title
   function updateBookInformation(book){
@@ -128,7 +146,11 @@ function BookInfo() {
         <div className='content'>
         <div className="backToCatalog navigationRow flexRow">
           <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
+          <div>
           <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
+          <button className='darkButton' onClick={()=>(createBorrowRequest())}> + Lening aanvragen</button>
+          </div>
+          
         </div>
         <div className='container bigBorder'>
           <div className='titleHeader bigBorder'>
