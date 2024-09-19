@@ -55,14 +55,10 @@ function BookInfo() {
         getBookInfoData()
       },[]  
     );
-    async function tryCreateBorrowRequest() {
-      let pBookId  = getAvailableBookId();
-      if(pBookId == -1){
-        console.log("There are no PhysicalBookCopies available right now");
-        // maby create a borrow request which does not include a specific Id
-
-      }else{
-        const userId = 1;//place holder value
+    async function createBorrowRequest() {
+      const pBookId  = books[0].physicalBook.pbookId;
+      console.log("bookId "+books[0].physicalBook.pbookId)
+      const userId = 1;//place holder value
         const createBorrowRequestURLBase = `http://localhost:8082/borrowing/addRequest`;
         const createBorrowRequestURL = `${createBorrowRequestURLBase}?pBookId=${pBookId}&userId=${userId}`;
         try{
@@ -75,18 +71,9 @@ function BookInfo() {
         catch (error) {
               console.error('Error creating borrow request:', error);
           }
-      }
-    }
-    function getAvailableBookId(){ 
-      let availableBookId = -1;
-      let a = 1;
-      let b=2;
-      books.map((book)=>{
-        if(book.availability.availabilityId ==1 && !book.archived){
-          availableBookId = book.copyId;
-        }
-    });
-      return availableBookId;
+
+        
+      
     }
 
     //updates all general book information from a specific title
@@ -163,7 +150,7 @@ function BookInfo() {
           <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
           <div>
           <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
-          <button className='darkButton' onClick={()=>(tryCreateBorrowRequest())}> + Lening aanvragen</button>
+          <button className='darkButton' onClick={()=>(createBorrowRequest())}> + Lening aanvragen</button>
           </div>
           
         </div>
