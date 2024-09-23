@@ -13,7 +13,7 @@ function Catalog() {
 
   useEffect(()=>{
     async function getCatalogData() {
-      const catalogAPI = "http://localhost:8082/book/catalog";
+      const catalogAPI = `${process.env.REACT_APP_BASE_API_URL}/book/catalog`;
       try {
           const response = await fetch(catalogAPI); // Wait for the fetch to complete
           if (!response.ok) {

@@ -43,7 +43,7 @@ function AddBook(){
                     year: year,                        
                     };
                 // Send the POST request to the backend API
-                fetch("http://localhost:8082/book/addBook", {
+                fetch(`${process.env.REACT_APP_BASE_API_URL}/book/addBook`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json" // Ensure the server expects JSON
