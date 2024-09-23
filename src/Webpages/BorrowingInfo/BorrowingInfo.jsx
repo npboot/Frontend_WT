@@ -54,7 +54,7 @@ function BorrowingInfo() {
    
         
     function navigationRowButtons(status, isbn){
-        if (status=="uitgeleend") {
+        if (status=="actief") {
             return(
                 <div className="navigationRowButtons">
                     <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(borrowing.isbn))}>Boek informatie</button>
@@ -70,7 +70,7 @@ function BorrowingInfo() {
     }
 
     function borrowingStatusRow(status, startDate, endDate){
-        if (status=="uitgeleend") {
+        if (status=="actief") {
             return(
                 <div className="tableRow thinBorder">
                     <p className="noMargin">Status: <strong>geleend</strong>&emsp;Geleend sinds: {startDate}</p>
