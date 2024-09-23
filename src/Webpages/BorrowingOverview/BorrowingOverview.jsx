@@ -26,7 +26,7 @@ function BorrowingOverview() {
             }
             const allBorrowingsJson = await response.json();
             
-            const collectionActiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="uitgeleend");
+            const collectionActiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="actief");
             collectionActiveBorrowings.map(borrowing=>(borrowing.borrowingDate = borrowing.borrowingDate.slice(0,10)));
 
             const collectionInactiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="ingeleverd");    
