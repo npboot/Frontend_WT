@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
 import { useState    } from "react";
 import { useEffect } from "react";
+import ReturnButton from "../../WebComponents/Buttons/ReturnButton";
 
 function BorrowingInfo() {
     const navigate = useNavigate();
@@ -13,9 +14,15 @@ function BorrowingInfo() {
 
     const [borrowing, setBorrowing] = useState({});
 
+    const location = useLocation();
+    const {state} =  location;
+
+    const borrowingId = state?.borrowingId;
+    const getBorrowingInfoAPI = `http://localhost:8082/borrowing/getInfo?borrowingId=${borrowingId}`;
+
     useEffect(()=>{
       async function getBorrowingData() {
-        const getBorrowingInfoAPI = 'http://localhost:8082/borrowing/getInfo?borrowingId=1';
+        
         try {
             const response = await fetch(getBorrowingInfoAPI); 
             if (!response.ok) {
@@ -23,17 +30,16 @@ function BorrowingInfo() {
             }
             const borrowingDataJson = await response.json();
 
-            const authors = borrowingDataJson.physicalBookCopy.physicalBook.book.authors;
-            const authorNames = authors.map(author=>(author.name));
-
             const data = {
-                isbn: borrowingDataJson.physicalBookCopy.physicalBook.book.isbn,
-                status: borrowingDataJson.borrowingStatus.borrowingStatusType,
-                title: borrowingDataJson.physicalBookCopy.physicalBook.book.title,
-                author: authorNames.join(", "),
-                copyNr: borrowingDataJson.physicalBookCopy.copyId,
-                startDate: borrowingDataJson.startDate.slice(0,10),
-                endDate: borrowingDataJson.returnDate.slice(0,10)
+                isbn: borrowingDataJson.isbn,
+                status: borrowingDataJson.status,
+                title: borrowingDataJson.title,
+                author: borrowingDataJson.authorName,
+                copyNr: borrowingDataJson.copyID,
+                note: borrowingDataJson.note,
+                startDate: borrowingDataJson.borrowingDate.slice(0,10),
+                endDate: borrowingDataJson.returnDate.slice(0,10),
+                borrowingId: borrowingDataJson.borrowingId
             };
             setBorrowing(data);
         } catch (error) {
@@ -52,7 +58,7 @@ function BorrowingInfo() {
             return(
                 <div className="navigationRowButtons">
                     <button className="darkButton" onClick={()=>(navigateToAddBookInfoPage(borrowing.isbn))}>Boek informatie</button>
-                    <button className="darkButton">Inleveren</button>
+                    <ReturnButton borrowingId={borrowing.borrowingId} name={"darkButton"}/>
                 </div>
             )   
         } else {
@@ -88,7 +94,7 @@ function BorrowingInfo() {
             <div className="content">
                 <div className="navigationRow flexRow">
                     <div className="catalogReturn" align="left">
-                        <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text={"terug naar catalogus"} />
+                        <ConfigurableRouteNavigationBTNoFill route={"/LeningenOverzicht"} text={"terug naar overzicht"} />
                     </div>
                     {navigationRowButtons(borrowing.status, borrowing.isbn)}
                 </div>
