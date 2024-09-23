@@ -58,7 +58,7 @@ function BookInfo() {
     async function createBorrowRequest() {
       const pBookId  = books[0].physicalBook.pbookId;
       const userId = 1;//place holder value
-        const createBorrowRequestURLBase = `http://localhost:8082/borrowing/addRequest`;
+        const createBorrowRequestURLBase = `${process.env.REACT_APP_BASE_API_URL}/borrowing/addRequest`;
         const createBorrowRequestURL = `${createBorrowRequestURLBase}?pBookId=${pBookId}&userId=${userId}`;
         try{
           const response = await fetch(createBorrowRequestURL,{
