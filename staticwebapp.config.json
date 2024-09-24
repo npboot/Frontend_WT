@@ -5,7 +5,7 @@
       "serve": "/index.html",
       "statusCode": 200
     }
-]
+],
 "platform":{
   "apiRuntime": "node:20.17.0"
 }
