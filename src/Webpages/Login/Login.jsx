@@ -2,6 +2,8 @@ import {ConfigurableRouteNavigationBTNoFill} from "../../WebComponents/RoutingBu
 import Header from "../../WebComponents/Header/Header.jsx"
 import { useEffect } from 'react';
 import "./Login.css"
+//import jwt from 'jsonwebtoken';
+import { jwtDecode }from 'jwt-decode'
 
 
 function Login() {
@@ -50,10 +52,19 @@ function Login() {
 
 
 function getTheAccesToken(data){
+  
+  const decodedResult = jwtDecode(data.accessToken);
+  localStorage.setItem("UserEmail",decodedResult.sub);
+  localStorage.setItem("UserAuthorities",decodedResult.authorities[0]);
+
   localStorage.setItem("UserToken",data.accessToken);
+  //console.log("UserEmail: "+localStorage.getItem("UserEmail"));
+  //console.log("UserAuthorities: "+localStorage.getItem("UserAuthorities"));
+  
 }
+
     
-console.log(localStorage.getItem("UserToken"));
+console.log(localStorage.getItem("UserInfo"));
 return (
       <div className="Login">
                     <div className="header">
