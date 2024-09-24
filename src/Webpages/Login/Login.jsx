@@ -3,10 +3,13 @@ import Header from "../../WebComponents/Header/Header.jsx"
 import { useEffect } from 'react';
 import "./Login.css"
 //import jwt from 'jsonwebtoken';
-import { jwtDecode }from 'jwt-decode'
+import { jwtDecode }from 'jwt-decode';
+import { useState } from 'react';
+import {  useNavigate } from 'react-router'
 
 
 function Login() {
+  const [titel,setTitle] = useState("Vul uw email en wachtwoord in om in te loggen.");
   
   useEffect(() => {
     // Attaching the event listener after the component mounts
@@ -35,6 +38,7 @@ function Login() {
               getTheAccesToken(await response.json() );
 
             } catch (error) {
+              setTitle("Probeer het opnieuw, wij herkennen deze email en wachtwoord combinatie niet.");
               console.error('Error incorrect login data:', error);
           };
         });
@@ -49,7 +53,9 @@ function Login() {
     };
 }, []); // Empty dependency array ensures this effect runs only once (on mount)
 
-
+const navigate = useNavigate();
+  const navigateToCatalogusPage = () => {
+      navigate("/Catalogus")}
 
 function getTheAccesToken(data){
   
@@ -58,6 +64,8 @@ function getTheAccesToken(data){
   localStorage.setItem("UserAuthorities",decodedResult.authorities[0]);
 
   localStorage.setItem("UserToken",data.accessToken);
+  setTitle("Even gedult, u wordt nu ingelogd.");
+  navigateToCatalogusPage();
   //console.log("UserEmail: "+localStorage.getItem("UserEmail"));
   //console.log("UserAuthorities: "+localStorage.getItem("UserAuthorities"));
   
@@ -73,7 +81,7 @@ return (
       
           <div id="addBookTable">
           <div className="tableHeader tableRow">
-              <p>vul uw email en wachtwoord in om in te loggen.</p>
+              <p>{titel}</p>
           </div>
           <form id="loginForm">
               <div className="addBookTableContent tableRow">
