@@ -5,6 +5,7 @@ import "./Login.css"
 
 
 function Login() {
+  
   useEffect(() => {
     // Attaching the event listener after the component mounts
     const form = document.getElementById("loginForm");
@@ -20,7 +21,6 @@ function Login() {
                 email: email,
                 password: password ,                      
                 };
-
             const baseURL= 'http://localhost:8082';
             try{
               const response = await fetch(`${process.env.REACT_APP_BASE_API_URL}/auth/login`, {
@@ -29,12 +29,15 @@ function Login() {
                   "Content-Type": "application/json" 
               },
                 body: JSON.stringify(jsonData)})
-              //console.log(await response.json());
+                
+              getTheAccesToken(await response.json() );
+
             } catch (error) {
               console.error('Error fetching catalog data:', error);
           };
         });
     }
+    
 
     // Clean up the event listener when the component unmounts
     return () => {
@@ -43,7 +46,15 @@ function Login() {
         }
     };
 }, []); // Empty dependency array ensures this effect runs only once (on mount)
-    return (
+
+
+
+function getTheAccesToken(data){
+  localStorage.setItem("UserToken",data.accessToken);
+}
+    
+console.log(localStorage.getItem("UserToken"));
+return (
       <div className="Login">
                     <div className="header">
                 <Header/>
