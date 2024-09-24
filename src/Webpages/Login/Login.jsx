@@ -35,7 +35,7 @@ function Login() {
               getTheAccesToken(await response.json() );
 
             } catch (error) {
-              console.error('Error fetching catalog data:', error);
+              console.error('Error incorrect login data:', error);
           };
         });
     }
@@ -67,9 +67,7 @@ function getTheAccesToken(data){
 console.log(localStorage.getItem("UserInfo"));
 return (
       <div className="Login">
-                    <div className="header">
-                <Header/>
-            </div>
+
 
       <div className="content">
       
