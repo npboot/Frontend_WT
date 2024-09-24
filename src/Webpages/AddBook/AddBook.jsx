@@ -10,7 +10,8 @@ function AddBook(){
     const {
         register,
         handleSubmit,
-       watch,
+        watch,
+        reset
       } = useForm();
     
       const watchIsPhysical = watch('book.isPhysical', false);
@@ -23,6 +24,7 @@ function AddBook(){
                     body: JSON.stringify(data)
                 })
                 console.log("added: "+JSON.stringify(data))
+                reset();
         } catch (e) {
             console.log("Error: "+e)
         }
