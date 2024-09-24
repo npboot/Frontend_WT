@@ -10,8 +10,10 @@ function AddBook(){
     const {
         register,
         handleSubmit,
-        formState: { errors },
+       watch,
       } = useForm();
+    
+      const watchIsPhysical = watch('book.isPhysical', false);
     
     const onSubmit = async (data)=> {
         try{
@@ -72,10 +74,12 @@ function AddBook(){
                     <input type="checkbox" id="isPhysical" name="isPhysical" {...register('book.isPhysical')}></input>
                     <label htmlFor="isPhysical">Fysiek boek</label><br></br>
                     </div>
-                    <div className="tableRow">
-                    <label className="column1" htmlFor="amount">Amount:</label>
-                    <input className="column2" type="number" id="amount" name="amount" {...register('amount', {required: true, valueAsNumber: true})}></input><br></br>
-                    </div>   
+                    {watchIsPhysical &&  
+                        (<div className="tableRow">
+                            <label className="column1" htmlFor="amount">Hoeveelheid:</label>
+                            <input className="column2" type="number" id="amount" name="amount" {...register('amount', {required: true, valueAsNumber: true})}></input><br></br>
+                        </div>)
+                    }                       
                     <div className="tableRow">                    
                     <label htmlFor="summary">Samenvatting:</label>
                     </div>
