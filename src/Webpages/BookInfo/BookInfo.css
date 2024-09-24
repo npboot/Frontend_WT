@@ -1,0 +1,134 @@
+
+#imageAndBookInfoSubContainer{
+    padding: .5rem;
+}
+
+.noMargin{
+    margin: 0px;
+}
+.bookInstanceText{
+    margin: 0px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: auto;
+}
+.bigBorder{
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+.smallBorder{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+.titleHeader{
+    background-color: var(--LIGHT-GREEN);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; 
+    font-weight: bold;
+    border: var(--THIN-BORDER);
+}
+.containerBookInfo{
+    padding-top: .5rem;
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    gap: 1rem;
+}
+
+.coverImage{
+    width: 150px;
+    height: 150px;
+}
+
+.testsquare{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(221,138,138);
+    border-style: solid;
+    border-color: brown;
+}
+#bookInstanceContainer{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: .2rem;
+    height: 220px;
+    width: 98%;
+
+}
+.containerBookInstanceItem{
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+}
+.archived{
+    background-color: brown;
+}
+.notArchived{
+    background-color: burlywood;
+}
+.mediumRightMargin{
+    margin-right: 3Rem;
+}
+.containerBookInstanceHistoryItem{
+    display: flex;
+    width: auto;
+}
+.containerBookInstanceItemExtended{
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+}
+.bookInstanceExtendedLeftContainer{
+    display: flex;
+    width: 35%;
+    flex-direction: column;
+    margin-left: 0.5Rem;
+    margin-bottom: 0.2Rem;
+}
+.bookInstanceExtendedRightContainer{
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    gap: .2rem;
+    height: 110px;
+    margin-top: 0.2Rem;
+}
+
+
+.debug{
+    border-style: dashed;
+    border-color: rgb(103, 103, 103);
+    border-width: 1px;
+}
+
+.blue{
+    border-color: blue;
+}
+.iSBNtext{
+    width:4rem;
+}
+.lendText{
+    width:50%;
+}
+.condition{
+    width:25%;
+}
+.dropDownButton{
+    height:1.5rem;
+    width:1.5rem;
+}
+

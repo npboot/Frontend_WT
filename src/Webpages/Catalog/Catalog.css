@@ -1,0 +1,84 @@
+/* general styles used for multiple components*/
+.tableRow {
+    display: flex;
+    flex-direction: row;
+    padding: 4px 10px;
+    text-align: left;
+    overflow-x: hidden;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+/*specific syles for single components*/
+.searchRow {
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.searchBar {
+    justify-content: space-between;
+    background-color: var(--LIGHT-GRAY);
+    width: 40%;
+    border-radius: 9999px;
+    height: 2.5em;
+}
+
+.searchInputField {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.searchInputField:focus {
+    outline: none;
+}
+
+.navigationRow{
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.navigationRow a {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.navigationRow a:hover {
+    color: var(--GRAY);
+}
+
+.catalogTable {
+    border: var(--MEDIUM-BORDER);    
+}
+
+.columnTitle {
+    width: 35%;    
+}
+.columnAuthor {
+    width: 25%;
+}
+.columnYear {
+    width: 15%;
+}
+.columnAvailability {
+    width: 25%;
+}
+
+.tableHeader {
+    background-color: var(--LIGHT-GREEN);
+    font-weight: bold;
+    border: var(--THIN-BORDER);
+}
+
+.tableContent {
+    height: 200px;
+    resize:vertical;
+}
+
+.book {
+    border: var(--THIN-BORDER);
+}

@@ -1,0 +1,22 @@
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.searchBar {
+    justify-content: space-between;
+    background-color: var(--LIGHT-GRAY);
+    width: 40%;
+    border-radius: 9999px;
+    height: 2.5em;
+}
+
+.searchInputField {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.searchInputField:focus {
+    outline: none;
+}

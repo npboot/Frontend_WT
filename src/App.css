@@ -1,38 +1,55 @@
 .App {
-  text-align: center;
+  /* constants*/
+  --DARK-GREEN: rgb(3,171,3);
+  --LIGHT-GREEN: rgb(0,230,0);
+  --GRAY: rgb(82,82,91);
+  --LIGHT-GRAY: rgb(228,228,231);
+  --THIN-BORDER: 1px solid black;       /*Can be used for example in tables, use the thin border inside a table*/
+  --MEDIUM-BORDER: 2px solid black;     /*Can be used for example in tables, use the medium border around a table*/
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.mediumBorder{
+  border: var(--MEDIUM-BORDER)
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.thinBorder{
+  border: var(--THIN-BORDER)
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.noMargin{
+  margin: 0;
+}
+
+.darkButton {
+  background-color: black;
   color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-radius: 9999px;
+  border: 0;
+  margin-left: 2px;
 }
 
-.App-link {
-  color: #61dafb;
+.darkButton:hover {
+  background-color: var(--GRAY);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.scroll{
+  overflow-y: scroll;
+  scrollbar-color: black var(--LIGHT-GRAY);
+  scrollbar-width:thin;
+}
+
+.content {
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 5%;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
