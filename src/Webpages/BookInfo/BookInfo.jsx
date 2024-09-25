@@ -118,7 +118,7 @@ function BookInfo() {
   function updateViewAccordingToAuthority(){
     console.log("UserAuthorities is: "+localStorage.getItem("UserAuthorities"));
     if(localStorage.getItem("UserAuthorities") == "trainer"){
-      setExemplaartoevoegenKnop(<button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>);
+      setExemplaartoevoegenKnop(<button className='darkButton' onClick={()=>(console.log("Hier wordt je ge stuurd naar een toevoeg pagina"))}> + Exemplaar toevoegen</button>);//navigateToEditBookPage()
     }
     else if(localStorage.getItem("UserAuthorities") == "trainee"){
     }else{
