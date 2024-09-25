@@ -15,6 +15,7 @@ function BookInfo() {
   const [summary,setSummary] = useState("the brown fox jumps over the lazy dog, the brown fox jumps over the lazy dog, the brown fox jumps over the lazy dog, ");
   const [books, setBooks] = useState([]);
   const [isbn, setISBN] = useState("444445");
+  const [copyHistory, setCopyHistory] = useState([]);
   const location = useLocation();
 
   // this variable an function are used to add routability to the "Exemplaar toevoegen" knop
@@ -31,6 +32,7 @@ function BookInfo() {
         updated.delete(id);
       } else {
         updated.add(id);
+        fetchCopyHistory(id); // fetch copyHistory when expanded
       }
       return updated;
     });
@@ -55,6 +57,29 @@ function BookInfo() {
         getBookInfoData()
       },[]  
     );
+
+    // this function gets the borrowing history for a specific book copy based on the copyId
+    const fetchCopyHistory = async (copyId) => {
+      const baseCopyHistoryRequestURL = `${process.env.REACT_APP_BASE_API_URL}/book/getCopyHistory`;
+      const allCopyHistoryByCopyId = `${baseCopyHistoryRequestURL}?copyId=${copyId}`;
+      try {
+        const response = await fetch(allCopyHistoryByCopyId);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const allCopyHistoryByCopyIdJSON = await response.json();
+        console.log(allCopyHistoryByCopyIdJSON);
+
+        //update state that stores the copy history-
+        setCopyHistory(prev => ({
+          ...prev,
+          [copyId]: allCopyHistoryByCopyIdJSON // Store history by copyId
+        }));
+      } catch (error) {
+        console.error('Error fetching copy history:', error);
+      }
+    };
+
     async function createBorrowRequest() {
       const pBookId  = books[0].physicalBook.pbookId;
       const userId = 1;//place holder value
@@ -92,6 +117,8 @@ function BookInfo() {
 
       //this function formates all the book data into two different divs, one to visualise a summary of the information, one to give a more expansive view.
   function createBookInstanceItem(physicalBookCopy){
+    const historyItems = copyHistory[physicalBookCopy.copyId] || []; // Fetch from state
+
     if(!expandedBookIds.has(physicalBookCopy.copyId)){
       return(
       <div key = {physicalBookCopy.copyId} className='containerBookInstanceItem smallBorder'> 
@@ -114,7 +141,15 @@ function BookInfo() {
               <button onClick={()=> console.log("Archieveren knop is geklickt van exemplaar: "+physicalBookCopy.copyId)}>Archieveren</button>
             </div>
           </div>
-          <div key = {physicalBookCopy.copyId} className='bookInstanceExtendedRightContainer  scroll'>
+          <div key={physicalBookCopy.copyId} className='bookInstanceExtendedRightContainer scroll'>
+            {historyItems.map((historyItem, index) => (
+              <div key={index} className='containerBookInstanceHistoryItem smallBorder'>
+                <span className='mediumRightMargin bookInstanceText'>{historyItem.date}</span>
+                <span className='bookInstanceText'>{historyItem.action}</span>
+              </div>
+            ))}
+          </div>
+          {/* <div key = {physicalBookCopy.copyId} className='bookInstanceExtendedRightContainer  scroll'>
             <div className='containerBookInstanceHistoryItem smallBorder'> 
                 <span className= 'mediumRightMargin bookInstanceText'>10-10-2024</span>
                 <span className='bookInstanceText'>Uitgeleend aan [WIP1]</span>
@@ -131,7 +166,7 @@ function BookInfo() {
                 <span className= 'mediumRightMargin bookInstanceText'>03-03-2024</span>
                 <span className='bookInstanceText'>Ingeleverd door [WIP2]</span>
               </div>
-            </div>
+            </div> */}
             <button className="dropDownButton" onClick={() => toggleExpand(physicalBookCopy.copyId)}>/\</button>
           </div>
       );
@@ -177,4 +212,3 @@ function BookInfo() {
     );
   }
   export default BookInfo;
-
