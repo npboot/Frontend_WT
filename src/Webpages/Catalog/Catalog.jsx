@@ -10,8 +10,10 @@ import { useEffect } from 'react';
 function Catalog() {
   //const books data moet in de toekomst uit de database komen
   const [books, setBooks] = useState([])
+  const [toevoegenBoekKnop, setToevoegenBoekKnop] = useState(<div></div>)
 
   useEffect(()=>{
+    updateViewAccordingToAuthority();
     async function getCatalogData() {
       const catalogAPI = `${process.env.REACT_APP_BASE_API_URL}/book/catalog`;
       try {
@@ -36,6 +38,17 @@ function Catalog() {
       navigate("/Info",{state:{isbn:value}})};
 
 
+  function updateViewAccordingToAuthority(){
+    console.log("UserAuthorities is: "+localStorage.getItem("UserAuthorities"));
+    if(localStorage.getItem("UserAuthorities") == "trainer"){
+      setToevoegenBoekKnop(<button className="darkButton" onClick={()=>(navigateToAddBookPage())}>+ Toevoegen</button>);
+    }
+    else if(localStorage.getItem("UserAuthorities") == "trainee"){
+    }else{
+      console.console.error("This authority type is not recognized");
+    }
+    
+  }
   function addBookToCatalogTable(book) {
   /*
   function to add a book to the catalog table.
@@ -78,7 +91,8 @@ function Catalog() {
           </div>
           <div className="navigationRow flexRow trainer">
             <ConfigurableRouteNavigationBTNoFill route={"/Trainer"} text = {"terug naar homepage"}/>
-            <button className="darkButton" onClick={()=>(navigateToAddBookPage())}>+ Toevoegen</button>
+            {toevoegenBoekKnop}
+            
           </div>
           {/* logic should be added later to make sure that the trainer and trainee see appropriate version
           <div className="navigationRow flexRow trainee">
