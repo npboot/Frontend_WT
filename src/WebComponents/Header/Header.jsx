@@ -13,11 +13,8 @@ return (
     borderRadius: 0,
     },
   }}variant="contained" size="lg" fullWidth aria-label="Basic button group">
-  <HomePageBT>Home</HomePageBT>/
   <CatalogBT >Catalogus</CatalogBT>
-  <ReserveBookBT>Reservering</ReserveBookBT>
   <BorrowingOverviewBT>Leningen</BorrowingOverviewBT>
-  <Button>TBA</Button>
 </ButtonGroup>
 );
 }

@@ -17,12 +17,13 @@ function BookInfo() {
   const [isbn, setISBN] = useState("444445");
   const [copyHistory, setCopyHistory] = useState([]);
   const location = useLocation();
-
+  const [exemplaartoevoegenKnop, setExemplaartoevoegenKnop] = useState(<div></div>)
+  /*
   // this variable an function are used to add routability to the "Exemplaar toevoegen" knop
   const navigate = useNavigate();
   const navigateToEditBookPage = () => {
       navigate("/boekaanpassen")}
-  
+  */
   // this state + function pair is used to store which book instance items are expaned and which are closed.
   const [expandedBookIds, setExpandedBookIds] = useState(new Set());
   const toggleExpand = (id) => {
@@ -39,6 +40,7 @@ function BookInfo() {
   };
     // this function gets called only when the page loads, this function requests book information from the backend using an API call
     useEffect(()=>{
+      updateViewAccordingToAuthority();
       async function getBookInfoData() {
         const {state} =  location;
         const baseBookInfoRequestURL = `${process.env.REACT_APP_BASE_API_URL}/book/getBookInfo`;
@@ -113,6 +115,18 @@ function BookInfo() {
     setSummary(book[0].physicalBook.book.summary);
   }
 
+  function updateViewAccordingToAuthority(){
+    console.log("UserAuthorities is: "+localStorage.getItem("UserAuthorities"));
+    if(localStorage.getItem("UserAuthorities") == "trainer"){
+      setExemplaartoevoegenKnop(<button className='darkButton' onClick={()=>(console.log("Hier wordt je ge stuurd naar een toevoeg pagina"))}> + Exemplaar toevoegen</button>);//navigateToEditBookPage()
+    }
+    else if(localStorage.getItem("UserAuthorities") == "trainee"){
+    }else{
+      console.console.error("This authority type is not recognized");
+    }
+    
+  }
+
 
 
       //this function formates all the book data into two different divs, one to visualise a summary of the information, one to give a more expansive view.
@@ -182,7 +196,7 @@ function BookInfo() {
         <div className="backToCatalog navigationRow flexRow">
           <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
           <div>
-          <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
+          {exemplaartoevoegenKnop}
           <button className='darkButton' onClick={()=>(createBorrowRequest())}> + Lening aanvragen</button>
           </div>
           
