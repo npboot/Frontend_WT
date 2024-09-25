@@ -8,6 +8,7 @@ import ReturnButton from "../../WebComponents/Buttons/ReturnButton"
 function BorrowingOverview() {
     const userId = 1;
     const getAllBorrowingsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getBorrowings?userId=${userId}`;
+    const getAllRequestsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getRequests?userId=${userId}`;
 
     const navigate = useNavigate();
     const navigateToBorrowingInfo = (value) => {
@@ -15,8 +16,9 @@ function BorrowingOverview() {
    
     const [activeBorrowings, setActiveBorrowings] = useState([]);
     const [inactiveBorrowings, setInactiveBorrowings] = useState([]);
-    const [activeRequests, setActiveRequests] = useState([]);
-    
+    const [pendingRequests, setPendingRequests] = useState([]);
+    const [deniedRequests, setDeniedRequests] = useState([]);
+
     useEffect(()=>{
       async function getAllBorrowings() {
         try {
@@ -38,7 +40,25 @@ function BorrowingOverview() {
         } catch (error) {
             console.error('Error fetching catalog data:', error);
         };};
+
+        async function getAllRequests() {
+            try {
+                const response = await fetch(getAllRequestsAPI); 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const allRequestsJson = await response.json();
+                console.log(allRequestsJson);
+                
+                const collectionPendingRequests = allRequestsJson.filter(request => request.status==="pending");
+                collectionPendingRequests.map(request=>(request.requestDate = request.requestDate.slice(0,10)));
+    
+                setPendingRequests(collectionPendingRequests);   
+            } catch (error) {
+                console.error('Error fetching catalog data:', error);
+            };};
       
+        getAllRequests();
         getAllBorrowings();  
       },[]  
     );
@@ -79,10 +99,10 @@ function BorrowingOverview() {
         )
     }
 
-    function activeRequestsTable(){
-        if (activeRequests.length > 0){
+    function pendingRequestsTable(){
+        if (pendingRequests.length > 0){
         return(
-            <div className="activeRequestsTable mediumBorder">
+            <div className="pendingRequestsTable mediumBorder">
             <div className="tableHeader tableRow">
                 <p className="column1 noMargin">Titel</p>
                 <p className="column2 noMargin">Auteur</p>
@@ -90,7 +110,7 @@ function BorrowingOverview() {
                 <p className="column4 noMargin"></p>
                 <p className="column5 noMargin"></p>
             </div>
-            {activeRequests.map(propsActiveRequest=>(activeRequestRow(propsActiveRequest)))}                   
+            {pendingRequests.map(propsPendingRequest=>(pendingRequestRow(propsPendingRequest)))}                   
         </div>
         )
         } else {
@@ -102,12 +122,12 @@ function BorrowingOverview() {
         }
     }
 
-    function activeRequestRow(propsActiveRequest){
+    function pendingRequestRow(propsPendingRequest){
         return(
             <div className="tableRow noMargin thinBorder">
-                <p className="column1">{propsActiveRequest.title}</p>
-                <p className="column2">{propsActiveRequest.authorName}</p>
-                <p className="column3">{propsActiveRequest.requestDate}</p>
+                <p className="column1">{propsPendingRequest.title}</p>
+                <p className="column2">{propsPendingRequest.authorName}</p>
+                <p className="column3">{propsPendingRequest.requestDate}</p>
                 <p className="column4"></p>
                 <button className="column5 darkButton">Verwijderen</button>
             </div>
@@ -165,9 +185,9 @@ function BorrowingOverview() {
                 <div className="activeBorrowings">
                     <h1>Actieve leningen</h1>
                     {activeBorrowingsTable()}
-                <div className="activeRequests">
+                <div className="pendingRequests">
                     <h1>Aanvragen</h1>
-                    {activeRequestsTable()}
+                    {pendingRequestsTable()}
                 <div className="inactiveBorrowings">
                     <h1>Ingeleverd</h1>
                     {inActiveBorrowingsTable()}                
