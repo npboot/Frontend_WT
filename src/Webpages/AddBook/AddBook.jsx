@@ -18,7 +18,7 @@ function AddBook(){
     
     const onSubmit = async (data)=> {
         try{
-            await fetch(`${process.env.REACT_APP_BASE_API_URL}/book/addBook`, 
+            await fetch(`api/book/addBook`, 
                 {   method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(data)

@@ -18,7 +18,7 @@ function BorrowingInfo() {
     const {state} =  location;
 
     const borrowingId = state?.borrowingId;
-    const getBorrowingInfoAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getInfo?borrowingId=${borrowingId}`;
+    const getBorrowingInfoAPI = `api/borrowing/getInfo?borrowingId=${borrowingId}`;
 
     useEffect(()=>{
       async function getBorrowingData() {

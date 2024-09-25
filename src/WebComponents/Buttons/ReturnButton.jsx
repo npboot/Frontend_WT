@@ -1,5 +1,5 @@
 function ReturnButton({borrowingId, name}){
-    const returnBorrowingAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/returnBorrowing?borrowingId=${borrowingId}`;
+    const returnBorrowingAPI = `api/borrowing/returnBorrowing?borrowingId=${borrowingId}`;
     const options = {
         method: 'PUT'
       };
