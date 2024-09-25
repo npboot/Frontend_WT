@@ -29,7 +29,6 @@ function BorrowingInfo() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const borrowingDataJson = await response.json();
-            console.log(borrowingDataJson);
             
             const data = {
                 isbn: borrowingDataJson.isbn,
