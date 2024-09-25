@@ -45,7 +45,7 @@ function Catalog() {
     }
     else if(localStorage.getItem("UserAuthorities") == "trainee"){
     }else{
-      console.console.error("This authority type is not recognized");
+      console.error("This authority type is not recognized");
     }
     
   }
