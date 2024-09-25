@@ -18,12 +18,12 @@ function BookInfo() {
   const [copyHistory, setCopyHistory] = useState([]);
   const location = useLocation();
   const [exemplaartoevoegenKnop, setExemplaartoevoegenKnop] = useState(<div></div>)
-
+  /*
   // this variable an function are used to add routability to the "Exemplaar toevoegen" knop
   const navigate = useNavigate();
   const navigateToEditBookPage = () => {
       navigate("/boekaanpassen")}
-  
+  */
   // this state + function pair is used to store which book instance items are expaned and which are closed.
   const [expandedBookIds, setExpandedBookIds] = useState(new Set());
   const toggleExpand = (id) => {
