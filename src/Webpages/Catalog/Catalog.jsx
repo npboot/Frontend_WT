@@ -37,9 +37,7 @@ function Catalog() {
   const navigateToAddBookInfoPage = (value) => {
       navigate("/Info",{state:{isbn:value}})};
 
-
   function updateViewAccordingToAuthority(){
-    console.log("UserAuthorities is: "+localStorage.getItem("UserAuthorities"));
     if(localStorage.getItem("UserAuthorities") == "trainer"){
       setToevoegenBoekKnop(<button className="darkButton" onClick={()=>(navigateToAddBookPage())}>+ Toevoegen</button>);
     }

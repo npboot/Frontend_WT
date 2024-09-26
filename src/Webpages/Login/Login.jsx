@@ -26,7 +26,6 @@ function Login() {
                 email: email,
                 password: password ,                      
                 };
-            const baseURL= 'http://localhost:8082';
             try{
               const response = await fetch(`/api/auth/login`, {
                 method: "POST",

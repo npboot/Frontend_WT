@@ -7,8 +7,8 @@ import ReturnButton from "../../WebComponents/Buttons/ReturnButton"
 
 function BorrowingOverview() {
     const userId = localStorage.getItem("UserID");
-    const getAllBorrowingsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getBorrowings?userId=${userId}`;
-    const getAllRequestsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getRequests?userId=${userId}`;
+    const getAllBorrowingsAPI = `/api/borrowing/getBorrowings?userId=${userId}`;
+    const getAllRequestsAPI = `/api/borrowing/getRequests?userId=${userId}`;
 
     const navigate = useNavigate();
     const navigateToBorrowingInfo = (value) => {
@@ -30,7 +30,6 @@ function BorrowingOverview() {
             
             const collectionActiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="actief");
             collectionActiveBorrowings.map(borrowing=>(borrowing.borrowingDate = borrowing.borrowingDate.slice(0,10)));
-            console.log("select collections activeborrowings: "+allBorrowingsJson)
             const collectionInactiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="ingeleverd");    
             collectionInactiveBorrowings.map(borrowing=>(borrowing.borrowingDate = borrowing.borrowingDate.slice(0,10)));
             collectionInactiveBorrowings.map(borrowing=>(borrowing.returnDate = borrowing.returnDate.slice(0,10))) ; 
@@ -48,7 +47,6 @@ function BorrowingOverview() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const allRequestsJson = await response.json();
-                console.log(allRequestsJson);
                 
                 const collectionPendingRequests = allRequestsJson.filter(request => request.status==="pending");
                 collectionPendingRequests.map(request=>(request.requestDate = request.requestDate.slice(0,10)));
