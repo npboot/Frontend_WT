@@ -18,7 +18,7 @@ function AddBook(){
     
     const onSubmit = async (data)=> {
         try{
-            await fetch(`${process.env.REACT_APP_BASE_API_URL}/book/addBook`, 
+            await fetch(`api/book/addBook`, 
                 {   method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(data)
@@ -51,7 +51,7 @@ function AddBook(){
                     <div className="addBookTableContent tableRow">
                     <div className="column1and2">
                     <div className="tableRow">
-                    <label className="column1" htmlFor="title">Title:</label>
+                    <label className="column1" htmlFor="title">Titel:</label>
                     <input className="column2" type="text" id="title" name="title" {...register('book.title', {required: true})}></input><br></br>
                     </div>
                     <div className="tableRow">
@@ -59,7 +59,7 @@ function AddBook(){
                     <input className="column2" type="number" id="isbn" name="isbn" {...register('book.isbn', {required: true, valueAsNumber: true})}></input><br></br>
                     </div>
                     <div className="tableRow">
-                    <label className="column1" htmlFor="year">Year:</label>
+                    <label className="column1" htmlFor="year">Jaar:</label>
                     <input className="column2" type="number" id="year" name="year" {...register('year', {required: true, valueAsNumber: true})}></input><br></br>
                     </div>                    
                     <div className="tableRow">
@@ -67,7 +67,7 @@ function AddBook(){
                     <input className="column2" type="text" id="authorName" name="authorName" {...register('author.0.name', {required: true})}></input><br></br>
                     </div>
                     <div className="tableRow">
-                    <label className="column1" htmlFor="categoryName">Category:</label>
+                    <label className="column1" htmlFor="categoryName">Categorie:</label>
                     <input className="column2" type="text" id="categoryName" name="categoryName" {...register('categories.0.category', {required: true})}></input><br></br>
                     </div>
                     <div className="tableRow checkboxRow">

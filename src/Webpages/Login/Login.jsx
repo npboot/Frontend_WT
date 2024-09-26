@@ -93,7 +93,7 @@ return (
               </div>
               <div className="tableRow">
               <label className="column1" htmlFor="password">Wachtwoord:</label>
-              <input className="column2" type="text" id="password" name="password" required></input><br></br>
+              <input className="column2" type="password" id="password" name="password" required></input><br></br>
               </div>
 
               <div className="tableRow">              
