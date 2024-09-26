@@ -7,8 +7,8 @@ import ReturnButton from "../../WebComponents/Buttons/ReturnButton"
 
 function BorrowingOverview() {
     const userId = 1;
-    const getAllBorrowingsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getBorrowings?userId=${userId}`;
-    const getAllRequestsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getRequests?userId=${userId}`;
+    const getAllBorrowingsAPI = `/api/borrowing/getBorrowings?userId=${userId}`;
+    const getAllRequestsAPI = `/api/borrowing/getRequests?userId=${userId}`;
 
     const navigate = useNavigate();
     const navigateToBorrowingInfo = (value) => {

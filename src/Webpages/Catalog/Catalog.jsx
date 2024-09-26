@@ -15,7 +15,7 @@ function Catalog() {
   useEffect(()=>{
     updateViewAccordingToAuthority();
     async function getCatalogData() {
-      const catalogAPI = `api/book/catalog`;
+      const catalogAPI = `/api/book/catalog`;
       try {
           const response = await fetch(catalogAPI); // Wait for the fetch to complete
           if (!response.ok) {

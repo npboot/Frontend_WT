@@ -43,7 +43,7 @@ function BookInfo() {
       updateViewAccordingToAuthority();
       async function getBookInfoData() {
         const {state} =  location;
-        const baseBookInfoRequestURL = `api/book/getBookInfo`;
+        const baseBookInfoRequestURL = `/api/book/getBookInfo`;
         const allCopyInfoByISBN = `${baseBookInfoRequestURL}?isbn=${state?.isbn}`;
         try {
             const response = await fetch(allCopyInfoByISBN); // Wait for the fetch to complete
@@ -62,7 +62,7 @@ function BookInfo() {
 
     // this function gets the borrowing history for a specific book copy based on the copyId
     const fetchCopyHistory = async (copyId) => {
-      const baseCopyHistoryRequestURL = `api/book/getCopyHistory`;
+      const baseCopyHistoryRequestURL = `/api/book/getCopyHistory`;
       const allCopyHistoryByCopyId = `${baseCopyHistoryRequestURL}?copyId=${copyId}`;
       try {
         const response = await fetch(allCopyHistoryByCopyId);
@@ -85,7 +85,7 @@ function BookInfo() {
     async function createBorrowRequest() {
       const pBookId  = books[0].physicalBook.pbookId;
       const userId = 1;//place holder value
-        const createBorrowRequestURLBase = `api/borrowing/addRequest`;
+        const createBorrowRequestURLBase = `/api/borrowing/addRequest`;
         const createBorrowRequestURL = `${createBorrowRequestURLBase}?pBookId=${pBookId}&userId=${userId}`;
         try{
           const response = await fetch(createBorrowRequestURL,{
