@@ -29,7 +29,7 @@ function BorrowingInfo() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const borrowingDataJson = await response.json();
-
+            
             const data = {
                 isbn: borrowingDataJson.isbn,
                 status: borrowingDataJson.status,
@@ -38,9 +38,14 @@ function BorrowingInfo() {
                 copyNr: borrowingDataJson.copyID,
                 note: borrowingDataJson.note,
                 startDate: borrowingDataJson.borrowingDate.slice(0,10),
-                endDate: borrowingDataJson.returnDate.slice(0,10),
                 borrowingId: borrowingDataJson.borrowingId
             };
+            if (borrowingDataJson.returnDate) {
+                data.endDate = borrowingDataJson.returnDate.slice(0,10)
+            } else {
+                data.endDate = ""
+            };
+            
             setBorrowing(data);
         } catch (error) {
             console.error('Error fetching catalog data:', error);
@@ -49,9 +54,7 @@ function BorrowingInfo() {
         getBorrowingData();
       },[]  
     );
-
-
-   
+ 
         
     function navigationRowButtons(status, isbn){
         if (status=="actief") {

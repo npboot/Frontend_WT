@@ -9,20 +9,21 @@ import { useEffect } from 'react';
 
 function BookInfo() {
   //define all variables in the form of states, so they can be changed to reflect the particulair book being viewed
-  const [titel,setTitle] = useState("Java voor dummies");
-  const [author,setAuthor] = useState("John Doe");
-  const [publishDate,setPublishDate] = useState("10-12-2023");
-  const [summary,setSummary] = useState("the brown fox jumps over the lazy dog, the brown fox jumps over the lazy dog, the brown fox jumps over the lazy dog, ");
+  const [titel,setTitle] = useState();
+  const [author,setAuthor] = useState();
+  const [publishDate,setPublishDate] = useState();
+  const [summary,setSummary] = useState();
   const [books, setBooks] = useState([]);
-  const [isbn, setISBN] = useState("444445");
+  const [isbn, setISBN] = useState();
   const [copyHistory, setCopyHistory] = useState([]);
   const location = useLocation();
-
+  const [isTrainer, setIsTrainer] = useState(false);
+  /*
   // this variable an function are used to add routability to the "Exemplaar toevoegen" knop
   const navigate = useNavigate();
   const navigateToEditBookPage = () => {
       navigate("/boekaanpassen")}
-  
+  */
   // this state + function pair is used to store which book instance items are expaned and which are closed.
   const [expandedBookIds, setExpandedBookIds] = useState(new Set());
   const toggleExpand = (id) => {
@@ -39,6 +40,7 @@ function BookInfo() {
   };
     // this function gets called only when the page loads, this function requests book information from the backend using an API call
     useEffect(()=>{
+      updateViewAccordingToAuthority();
       async function getBookInfoData() {
         const {state} =  location;
         const baseBookInfoRequestURL = `api/book/getBookInfo`;
@@ -113,7 +115,17 @@ function BookInfo() {
     setSummary(book[0].physicalBook.book.summary);
   }
 
-
+  function updateViewAccordingToAuthority(){
+    console.log("UserAuthorities is: "+localStorage.getItem("UserAuthorities"));
+    if(localStorage.getItem("UserAuthorities") == "trainer"){
+      setIsTrainer(true);
+    } else if(localStorage.getItem("UserAuthorities") == "trainee"){
+      setIsTrainer(false);
+    }else{
+      console.console.error("This authority type is not recognized");
+    }
+    
+  }
 
       //this function formates all the book data into two different divs, one to visualise a summary of the information, one to give a more expansive view.
   function createBookInstanceItem(physicalBookCopy){
@@ -172,7 +184,34 @@ function BookInfo() {
       );
 
     }
+
   }
+
+
+  // funtion to add a new copy of the physical book to the database
+  async function addBookCopy(){
+    const addBookCopyAPI = `${process.env.REACT_APP_BASE_API_URL}/book/addCopy?pBookId=${books[0].physicalBook.pbookId}`
+    const options = {method: 'POST'};
+    try {
+      await fetch(addBookCopyAPI, options)
+          .then(response => {
+              if (!response.ok) {
+              throw new Error('Network response was not ok');
+              }
+          })
+          .then(data => {
+              console.log('Resource updated successfully:', data);
+          })
+          .catch(error => {
+              console.error('There was a problem with your fetch operation:', error);
+          }); 
+          window.location.reload(false);}
+    catch{
+      console.log("error");
+    }                 
+  }
+
+
     return (
       <div className="BookInfo">
         <div>
@@ -182,7 +221,8 @@ function BookInfo() {
         <div className="backToCatalog navigationRow flexRow">
           <ConfigurableRouteNavigationBTNoFill route={"/Catalogus"} text = {"Terug naar catalogus"}/>
           <div>
-          <button className='darkButton' onClick={()=>(navigateToEditBookPage())}> + Exemplaar toevoegen</button>
+          {isTrainer && (<button className='darkButton' onClick={()=>(addBookCopy())}> + Exemplaar toevoegen</button>
+          )}
           <button className='darkButton' onClick={()=>(createBorrowRequest())}> + Lening aanvragen</button>
           </div>
           

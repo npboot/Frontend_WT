@@ -90,7 +90,6 @@ function Catalog() {
             <SearchBar/>
           </div>
           <div className="navigationRow flexRow trainer">
-            <ConfigurableRouteNavigationBTNoFill route={"/Trainer"} text = {"terug naar homepage"}/>
             {toevoegenBoekKnop}
             
           </div>
