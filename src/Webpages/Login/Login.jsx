@@ -62,8 +62,9 @@ function getTheAccesToken(data){
   const decodedResult = jwtDecode(data.accessToken);
   localStorage.setItem("UserEmail",decodedResult.sub);
   localStorage.setItem("UserAuthorities",decodedResult.authorities[0]);
-
+  localStorage.setItem("UserID",decodedResult.userID);
   localStorage.setItem("UserToken",data.accessToken);
+
   setTitle("Even gedult, u wordt nu ingelogd.");
   navigateToCatalogusPage();
   //console.log("UserEmail: "+localStorage.getItem("UserEmail"));

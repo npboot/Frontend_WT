@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import ReturnButton from "../../WebComponents/Buttons/ReturnButton"
 
 function BorrowingOverview() {
-    const userId = 4;
+    const userId = localStorage.getItem("UserID");
     const getAllBorrowingsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getBorrowings?userId=${userId}`;
     const getAllRequestsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getRequests?userId=${userId}`;
 
