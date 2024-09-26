@@ -68,7 +68,7 @@ function AddBook(){
                     </div>
                     <div className="tableRow">
                     <label className="column1" htmlFor="categoryName">Category:</label>
-                    <input className="column2" type="text" id="categoryName" name="categoryName" {...register('categories.0.categoryName', {required: true})}></input><br></br>
+                    <input className="column2" type="text" id="categoryName" name="categoryName" {...register('categories.0.category', {required: true})}></input><br></br>
                     </div>
                     <div className="tableRow checkboxRow">
                     <input type="checkbox" id="isOnline" name="isOnline" {...register('book.isOnline')}></input>
