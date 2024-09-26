@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import ReturnButton from "../../WebComponents/Buttons/ReturnButton"
 
 function BorrowingOverview() {
-    const userId = 1;
+    const userId = 4;
     const getAllBorrowingsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getBorrowings?userId=${userId}`;
     const getAllRequestsAPI = `${process.env.REACT_APP_BASE_API_URL}/borrowing/getRequests?userId=${userId}`;
 
@@ -30,7 +30,7 @@ function BorrowingOverview() {
             
             const collectionActiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="actief");
             collectionActiveBorrowings.map(borrowing=>(borrowing.borrowingDate = borrowing.borrowingDate.slice(0,10)));
-
+            console.log("select collections activeborrowings: "+allBorrowingsJson)
             const collectionInactiveBorrowings = allBorrowingsJson.filter(borrowing => borrowing.status==="ingeleverd");    
             collectionInactiveBorrowings.map(borrowing=>(borrowing.borrowingDate = borrowing.borrowingDate.slice(0,10)));
             collectionInactiveBorrowings.map(borrowing=>(borrowing.returnDate = borrowing.returnDate.slice(0,10))) ; 
